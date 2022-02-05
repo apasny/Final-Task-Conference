@@ -1,7 +1,7 @@
-package com.epam.webapphello;
+package com.epam.conference;
 
-import com.epam.webapphello.command.Command;
-import com.epam.webapphello.command.CommandFactory;
+import com.epam.conference.command.Command;
+import com.epam.conference.command.CommandFactory;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;

@@ -1,6 +1,6 @@
-package com.epam.webapphello.command;
+package com.epam.conference.command;
 
-import com.epam.webapphello.service.UserService;
+import com.epam.conference.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

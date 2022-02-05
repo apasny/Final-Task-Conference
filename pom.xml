@@ -5,11 +5,11 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>org.example</groupId>
-  <artifactId>web-app-hello</artifactId>
+  <artifactId>conference</artifactId>
   <version>1.0-SNAPSHOT</version>
   <packaging>war</packaging>
 
-  <name>web-app-hello Maven Webapp</name>
+  <name>conference Maven Webapp</name>
   <url>http://www.final-task-conference.com</url>
 
   <properties>
@@ -35,7 +35,7 @@
   </dependencies>
 
   <build>
-    <finalName>web-app-hello</finalName>
+    <finalName>conference</finalName>
     <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
       <plugins>
         <plugin>

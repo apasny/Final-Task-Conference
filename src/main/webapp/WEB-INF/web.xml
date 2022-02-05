@@ -7,7 +7,7 @@
   
   <servlet>
     <servlet-name>main</servlet-name>
-    <servlet-class>com.epam.webapphello.Controller</servlet-class>
+    <servlet-class>com.epam.conference.Controller</servlet-class>
   </servlet>
 
   <servlet-mapping>

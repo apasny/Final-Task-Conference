@@ -1,4 +1,4 @@
-package com.epam.webapphello.service;
+package com.epam.conference.service;
 
 public interface UserService {
 

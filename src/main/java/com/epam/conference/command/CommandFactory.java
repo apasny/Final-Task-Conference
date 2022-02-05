@@ -1,6 +1,6 @@
-package com.epam.webapphello.command;
+package com.epam.conference.command;
 
-import com.epam.webapphello.service.UserServiceImpl;
+import com.epam.conference.service.UserServiceImpl;
 
 public class CommandFactory {
 
