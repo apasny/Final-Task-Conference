@@ -1,9 +1,13 @@
 package com.epam.conference.command;
 
+import com.epam.conference.entity.User;
+import com.epam.conference.exception.CommandException;
+import com.epam.conference.exception.ServiceException;
 import com.epam.conference.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Optional;
 
 public class LoginCommand implements Command{
 
@@ -14,10 +18,22 @@ public class LoginCommand implements Command{
     }
 
     @Override
-    public String execute(HttpServletRequest req, HttpServletResponse resp) {
+    public String execute(HttpServletRequest req, HttpServletResponse resp)  {
         String login = req.getParameter("login");
         String password = req.getParameter("password");
-        if (userService.login(login, password)){
+
+        if (login == null | password == null) {
+            throw new NullPointerException("login or password is null");
+        }
+
+        Optional<User> user;
+        try {
+            user = userService.login(login, password);
+        } catch (ServiceException e) {
+            throw new NullPointerException("Not working userService.login");
+        }
+        if (user.isPresent()){
+            req.getSession().setAttribute("user",user.get());
             return "WEB-INF/view/main.jsp";
         } else {
             return "index.jsp";
