@@ -1,5 +1,8 @@
 package com.epam.conference.connection;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -7,21 +10,23 @@ import java.util.ResourceBundle;
 
 public class DatabaseConnector {
 
-    public static Connection getConnection() {
+    private static final Logger LOGGER = LogManager.getLogger(DatabaseConnector.class);
 
-//        ResourceBundle resourceBundle = ResourceBundle.getBundle("database");
-//        String url = resourceBundle.getString("db.url");
-//        String user = resourceBundle.getString("db.user");
-//        String password = resourceBundle.getString("db.password");
-        String url = "jdbc:mysql://localhost:3306/conference";
-        String user = "root";
-        String password = "lolik123";
+    public static Connection getConnection() throws SQLException {
+
+        ResourceBundle resourceBundle = ResourceBundle.getBundle("database");
+        String url = resourceBundle.getString("db.url");
+        String user = resourceBundle.getString("db.user");
+        String password = resourceBundle.getString("db.password");
 
         try {
-            return DriverManager.getConnection(url, user, password);
-        } catch (SQLException e) {
-            throw new NullPointerException("connection error");
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            LOGGER.warn(e.getMessage());
+            e.printStackTrace();
         }
-    }
 
+        return DriverManager.getConnection(url, user, password);
+
+    }
 }

@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public abstract class AbstractDao<T> implements Dao<T> {
+public abstract class AbstractDao<T> implements Dao {
 
     private final Connection connection;
 
@@ -33,20 +33,25 @@ public abstract class AbstractDao<T> implements Dao<T> {
         }
     }
 
-    private PreparedStatement createStatement(String query, Object... params) throws SQLException {
+    private PreparedStatement createStatement(String query, Object... params) {
         if (connection == null) throw new NullPointerException("connection is null");
-        PreparedStatement preparedStatement = connection.prepareStatement(query);
-        for (int i = 1; i <= params.length; i++) {
-            preparedStatement.setObject(i, params[i - 1]);
+        PreparedStatement preparedStatement;
+        try{
+            preparedStatement = connection.prepareStatement(query);
+            for (int i = 1; i <= params.length; i++) {
+                preparedStatement.setObject(i, params[i - 1]);
+            }
+        } catch (SQLException e) {
+            throw new NullPointerException("createStatement error");
         }
         return preparedStatement;
     }
 
-    public List<T> getAll() throws DaoException {
-        String table = getTableName();
-        Mapper<T> mapper = (Mapper<T>) Mapper.createTable(table);
-        return executeQuery("select * from" + table, mapper);
-    }
+//    public List<T> getAll() throws DaoException {
+//        String table = getTableName();
+//        Mapper<T> mapper = (Mapper<T>) Mapper.createTable(table);
+//        return executeQuery("select * from" + table, mapper);
+//    }
 
     protected Optional<T> executeForSingleResult(String query, Mapper<T> mapper, Object... params) throws DaoException {
         List<T> items = executeQuery(query, mapper, params);

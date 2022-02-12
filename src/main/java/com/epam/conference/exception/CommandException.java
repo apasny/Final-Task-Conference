@@ -1,11 +1,12 @@
 package com.epam.conference.exception;
 
-import java.sql.SQLException;
 
-public class CommandException extends SQLException {
+public class CommandException extends Exception {
 
-    public CommandException(SQLException exception) {
+    public CommandException(Exception exception) {
         super(exception);
     }
+
+
 
 }

@@ -1,6 +1,6 @@
 package com.epam.conference.dao;
 
-public interface Dao<T> {
+public interface Dao {
 
     void create();
     void update();

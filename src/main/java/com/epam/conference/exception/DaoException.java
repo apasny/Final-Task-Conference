@@ -1,9 +1,8 @@
 package com.epam.conference.exception;
 
-import java.sql.SQLException;
 
-public class DaoException extends SQLException {
+public class DaoException extends Exception {
 
-    public DaoException(SQLException exception) {
+    public DaoException(Exception exception) {
     }
 }

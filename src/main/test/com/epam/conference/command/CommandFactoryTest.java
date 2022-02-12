@@ -9,7 +9,7 @@ import java.sql.SQLException;
 public class CommandFactoryTest {
 
     @Test
-    public void createCommand() {
+    public void createCommand() throws CommandException {
 
         CommandFactory commandFactory = new CommandFactory();
         Command command;
