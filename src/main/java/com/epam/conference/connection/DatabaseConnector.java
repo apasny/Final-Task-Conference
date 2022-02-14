@@ -1,7 +1,6 @@
 package com.epam.conference.connection;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import com.epam.conference.exception.DatabaseConnectorException;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -10,11 +9,8 @@ import java.util.ResourceBundle;
 
 public class DatabaseConnector {
 
-    private static final Logger LOGGER = LogManager.getLogger(DatabaseConnector.class);
+    public static Connection getConnection(ResourceBundle resourceBundle) throws DatabaseConnectorException {
 
-    public static Connection getConnection() throws SQLException {
-
-        ResourceBundle resourceBundle = ResourceBundle.getBundle("database");
         String url = resourceBundle.getString("db.url");
         String user = resourceBundle.getString("db.user");
         String password = resourceBundle.getString("db.password");
@@ -22,11 +18,19 @@ public class DatabaseConnector {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
         } catch (ClassNotFoundException e) {
-            LOGGER.warn(e.getMessage());
-            e.printStackTrace();
+            throw new DatabaseConnectorException("Cannot create database connector driver " +
+                    e.getMessage(), e);
         }
 
-        return DriverManager.getConnection(url, user, password);
+        Connection connection;
+        try {
+            connection = DriverManager.getConnection(url, user, password);
+        } catch (SQLException e) {
+            throw new DatabaseConnectorException("Database connection failure " +
+                    e.getSQLState() +
+                    e.getErrorCode(), e);
+        }
 
+        return connection;
     }
 }

@@ -4,11 +4,11 @@ import java.sql.Time;
 import java.util.Date;
 import java.util.Objects;
 
-public class Section {
+public class Section implements Identifiable {
 
     public static final String TABLE = "section";
 
-    private final long id;
+    private final Long id;
     private final String topic;
     private final Date startDate;
     private final Date endDate;
@@ -17,7 +17,7 @@ public class Section {
     private final int maxAttendees;
     private final boolean isAvailable;
 
-    public Section(long id, String topic, Date startDate, Date endDate, Time startTime, Time endTime, int maxAttendees, boolean isAvailable) {
+    public Section(Long id, String topic, Date startDate, Date endDate, Time startTime, Time endTime, int maxAttendees, boolean isAvailable) {
         this.id = id;
         this.topic = topic;
         this.startDate = startDate;
@@ -28,7 +28,8 @@ public class Section {
         this.isAvailable = isAvailable;
     }
 
-    public long getId() {
+    @Override
+    public Long getId() {
         return id;
     }
 
@@ -65,9 +66,9 @@ public class Section {
         if (this == object) return true;
         if (object == null || getClass() != object.getClass()) return false;
         Section section = (Section) object;
-        return id == section.id &&
-                maxAttendees == section.maxAttendees &&
+        return maxAttendees == section.maxAttendees &&
                 isAvailable == section.isAvailable &&
+                Objects.equals(id, section.id) &&
                 Objects.equals(topic, section.topic) &&
                 Objects.equals(startDate, section.startDate) &&
                 Objects.equals(endDate, section.endDate) &&
@@ -78,5 +79,19 @@ public class Section {
     @Override
     public int hashCode() {
         return Objects.hash(id, topic, startDate, endDate, startTime, endTime, maxAttendees, isAvailable);
+    }
+
+    @Override
+    public String toString() {
+        return "Section{" +
+                "id=" + id +
+                ", topic='" + topic + '\'' +
+                ", startDate=" + startDate +
+                ", endDate=" + endDate +
+                ", startTime=" + startTime +
+                ", endTime=" + endTime +
+                ", maxAttendees=" + maxAttendees +
+                ", isAvailable=" + isAvailable +
+                '}';
     }
 }

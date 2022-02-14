@@ -18,19 +18,15 @@ public class LoginCommand implements Command{
     }
 
     @Override
-    public String execute(HttpServletRequest req, HttpServletResponse resp)  {
+    public String execute(HttpServletRequest req, HttpServletResponse resp) throws CommandException {
         String login = req.getParameter("login");
         String password = req.getParameter("password");
-
-        if (login == null | password == null) {
-            throw new NullPointerException("login or password is null");
-        }
 
         Optional<User> user;
         try {
             user = userService.login(login, password);
         } catch (ServiceException e) {
-            throw new NullPointerException("Not working userService.login");
+            throw new CommandException("Unable to execute login command" + e.getMessage(),e);
         }
         if (user.isPresent()){
             req.getSession().setAttribute("user",user.get());

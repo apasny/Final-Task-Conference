@@ -1,5 +1,6 @@
 package com.epam.conference.mapper;
 
+import com.epam.conference.entity.Identifiable;
 import com.epam.conference.entity.Section;
 import com.epam.conference.entity.User;
 
@@ -10,7 +11,7 @@ public interface Mapper<T> {
 
     T map(ResultSet resultSet) throws SQLException;
 
-    static Mapper<?> createTable(String table) {
+    static Mapper<? extends Identifiable> createTable(String table) {
         switch (table) {
             case User.TABLE:
                 return new UserMapper();

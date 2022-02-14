@@ -1,31 +1,31 @@
 package com.epam.conference.command;
 
-import com.epam.conference.connection.DatabaseConnector;
+import com.epam.conference.dao.DaoHelper;
+import com.epam.conference.dao.DaoHelperFactory;
 import com.epam.conference.dao.UserDao;
-import com.epam.conference.dao.UserDaoImpl;
 import com.epam.conference.exception.CommandException;
+import com.epam.conference.exception.DatabaseConnectorException;
 import com.epam.conference.service.UserService;
 import com.epam.conference.service.UserServiceImpl;
 
-import java.sql.Connection;
 import java.sql.SQLException;
 
 public class CommandFactory {
 
     public Command createCommand(String command) throws CommandException {
 
-        UserDao userDao;
-        UserService userService;
-        Connection connection;
+        DaoHelperFactory daoHelperFactory;
+        DaoHelper daoHelper;
 
         try {
-            connection = DatabaseConnector.getConnection();
-        } catch (SQLException e) {
-            throw new CommandException(e);
+            daoHelperFactory = new DaoHelperFactory();
+            daoHelper = daoHelperFactory.create();
+        } catch (DatabaseConnectorException | SQLException e) {
+            throw new CommandException("Unable to create command " + e.getMessage(),e);
         }
 
-        userDao = new UserDaoImpl(connection);
-        userService = new UserServiceImpl(userDao);
+        UserDao userDao = daoHelper.createUserDao();
+        UserService userService = new UserServiceImpl(userDao);
 
         switch (command) {
             case "login":

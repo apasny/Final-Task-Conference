@@ -22,7 +22,7 @@ public class UserServiceImpl implements UserService {
         try {
             user = dao.findUserByLoginAndPassword(login,password);
         } catch (DaoException e) {
-            throw new NullPointerException("findUserByLoginAndPassword error");
+            throw new ServiceException("Login is failed" + e.getMessage(),e);
         }
 
         return user;

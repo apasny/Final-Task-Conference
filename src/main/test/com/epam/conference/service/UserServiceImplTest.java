@@ -1,25 +1,25 @@
 package com.epam.conference.service;
 
-import com.epam.conference.connection.DatabaseConnector;
+import com.epam.conference.connection.ConnectionFactory;
+import com.epam.conference.connection.ProxyConnection;
 import com.epam.conference.dao.UserDao;
 import com.epam.conference.dao.UserDaoImpl;
 import com.epam.conference.entity.User;
+import com.epam.conference.exception.ServiceException;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.Optional;
 
 public class UserServiceImplTest {
 
     @Test
-    public void login() throws SQLException {
+    public void login() throws ServiceException {
 
         String login = "admin";
         String password = "admin";
 
-        Connection connection = DatabaseConnector.getConnection();
+        ProxyConnection connection = ConnectionFactory.create();
 
         UserDao userDao = new UserDaoImpl(connection);
 
@@ -27,10 +27,6 @@ public class UserServiceImplTest {
 
         Optional<User> user = userService.login(login, password);
 
-        if (user.isPresent()) {
-            Assert.assertEquals(user.get().getLogin(), login);
-        } else {
-            throw new NullPointerException("No user");
-        }
+        user.ifPresent(value -> Assert.assertEquals(value.getLogin(), "admin"));
     }
 }
