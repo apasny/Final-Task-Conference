@@ -8,11 +8,11 @@ import java.util.ResourceBundle;
 
 public class ConnectionFactory {
 
-    private static final ResourceBundle resourceBundle = ResourceBundle.getBundle("database");
-    private static Connection connection;
-    private static ConnectionPool connectionPool;
+    private final ResourceBundle resourceBundle = ResourceBundle.getBundle("database");
+    private Connection connection;
+    private ConnectionPool connectionPool;
 
-    static {
+    {
         try {
             connection = DatabaseConnector.getConnection(resourceBundle);
             connectionPool = ConnectionPool.getInstance();
@@ -24,7 +24,7 @@ public class ConnectionFactory {
     public ConnectionFactory() {
     }
 
-    public static ProxyConnection create() {
+    public ProxyConnection create() {
         return new ProxyConnection(connection, connectionPool);
     }
 

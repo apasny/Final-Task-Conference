@@ -1,5 +1,6 @@
 package com.epam.conference.mapper;
 
+import com.epam.conference.entity.Conference;
 import com.epam.conference.entity.Identifiable;
 import com.epam.conference.entity.Section;
 import com.epam.conference.entity.User;
@@ -17,6 +18,8 @@ public interface Mapper<T> {
                 return new UserMapper();
             case Section.TABLE:
                 return new SectionMapper();
+            case Conference.TABLE:
+                return new ConferenceMapper();
             default:
                 throw new IllegalArgumentException("Unknown table");
         }

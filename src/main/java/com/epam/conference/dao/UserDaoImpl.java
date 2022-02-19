@@ -12,7 +12,7 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
     private static final String FIND_BY_LOGIN_AND_PASSWORD = "SELECT * FROM user WHERE login = ? AND password = ?";
 
     public UserDaoImpl(Connection connection) {
-        super(connection);
+        super(connection, new UserMapper());
     }
 
     @Override
@@ -20,7 +20,6 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
 
         return executeForSingleResult(
                 FIND_BY_LOGIN_AND_PASSWORD,
-                new UserMapper(),
                 login,
                 password
         );

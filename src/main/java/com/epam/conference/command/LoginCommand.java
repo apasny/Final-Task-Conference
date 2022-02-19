@@ -29,7 +29,8 @@ public class LoginCommand implements Command{
             throw new CommandException("Unable to execute login command" + e.getMessage(),e);
         }
         if (user.isPresent()){
-            req.getSession().setAttribute("user",user.get());
+            req.getSession().setAttribute("id",user.get().getId());
+            req.getSession().setAttribute("isAdmin",user.get().isAdmin());
             return "WEB-INF/view/main.jsp";
         } else {
             return "index.jsp";

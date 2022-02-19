@@ -14,52 +14,52 @@ import java.util.Optional;
 
 public class UserDaoImplTest {
 
-    @Test
-    public void getAll() throws DaoException {
+//    @Test
+//    public void getAll() throws DaoException {
+//
+//        UserDaoImpl userDao = new UserDaoImpl(ConnectionFactory.create());
+//
+//        List<User> user = userDao.getAll();
+//
+//        Assert.assertEquals(user.size(), 3);
+//    }
 
-        UserDaoImpl userDao = new UserDaoImpl(ConnectionFactory.create());
-
-        List<User> user = userDao.getAll();
-
-        Assert.assertEquals(user.size(), 3);
-    }
-
-    @Test
-    public void findUserByLoginAndPassword() throws DaoException {
-        String login = "admin";
-        String password = "admin";
-
-        UserDaoImpl userDao = new UserDaoImpl(ConnectionFactory.create());
-
-        Optional<User> user = userDao.findUserByLoginAndPassword(login, password);
-
-        user.ifPresent(value -> Assert.assertEquals(value.getSurname(), "chan"));
-
-    }
-
-    @Test
-    public void executeQuery() throws DaoException {
-        String query = "SELECT * FROM user WHERE login = ? and password = ?";
-        String login = "admin";
-        String password = "qwerty123";
-
-        UserDaoImpl userDao = new UserDaoImpl(ConnectionFactory.create());
-
-        List<User> user = userDao.executeQuery(query, new UserMapper(), login, password);
-
-        Assert.assertEquals(user.get(0).getName(), "иван");
-
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void executeForSingleResult() throws DaoException {
-        String query = "SELECT * FROM user WHERE login = ?";
-        String login = "admin";
-
-        UserDaoImpl userDao = new UserDaoImpl(ConnectionFactory.create());
-
-        Optional<User> user = userDao.executeForSingleResult(query, new UserMapper(), login);
-
-        user.ifPresent(value -> Assert.assertEquals(value.getLogin(), "admin"));
-    }
+//    @Test
+//    public void findUserByLoginAndPassword() throws DaoException {
+//        String login = "admin";
+//        String password = "admin";
+//
+//        UserDaoImpl userDao = new UserDaoImpl(ConnectionFactory.create());
+//
+//        Optional<User> user = userDao.findUserByLoginAndPassword(login, password);
+//
+//        user.ifPresent(value -> Assert.assertEquals(value.getSurname(), "chan"));
+//
+//    }
+//
+//    @Test
+//    public void executeQuery() throws DaoException {
+//        String query = "SELECT * FROM user WHERE login = ? and password = ?";
+//        String login = "admin";
+//        String password = "qwerty123";
+//
+//        UserDaoImpl userDao = new UserDaoImpl(ConnectionFactory.create());
+//
+//        List<User> user = userDao.executeQuery(query, new UserMapper(), login, password);
+//
+//        Assert.assertEquals(user.get(0).getName(), "иван");
+//
+//    }
+//
+//    @Test(expected = IllegalArgumentException.class)
+//    public void executeForSingleResult() throws DaoException {
+//        String query = "SELECT * FROM user WHERE login = ?";
+//        String login = "admin";
+//
+//        UserDaoImpl userDao = new UserDaoImpl(ConnectionFactory.create());
+//
+//        Optional<User> user = userDao.executeForSingleResult(query, new UserMapper(), login);
+//
+//        user.ifPresent(value -> Assert.assertEquals(value.getLogin(), "admin"));
+//    }
 }

@@ -1,7 +1,6 @@
 package com.epam.conference.entity;
 
 import java.sql.Time;
-import java.util.Date;
 import java.util.Objects;
 
 public class Section implements Identifiable {
@@ -10,18 +9,14 @@ public class Section implements Identifiable {
 
     private final Long id;
     private final String topic;
-    private final Date startDate;
-    private final Date endDate;
     private final Time startTime;
     private final Time endTime;
     private final int maxAttendees;
     private final boolean isAvailable;
 
-    public Section(Long id, String topic, Date startDate, Date endDate, Time startTime, Time endTime, int maxAttendees, boolean isAvailable) {
+    public Section(Long id, String topic, Time startTime, Time endTime, int maxAttendees, boolean isAvailable) {
         this.id = id;
         this.topic = topic;
-        this.startDate = startDate;
-        this.endDate = endDate;
         this.startTime = startTime;
         this.endTime = endTime;
         this.maxAttendees = maxAttendees;
@@ -35,14 +30,6 @@ public class Section implements Identifiable {
 
     public String getTopic() {
         return topic;
-    }
-
-    public Date getStartDate() {
-        return startDate;
-    }
-
-    public Date getEndDate() {
-        return endDate;
     }
 
     public Time getStartTime() {
@@ -70,15 +57,13 @@ public class Section implements Identifiable {
                 isAvailable == section.isAvailable &&
                 Objects.equals(id, section.id) &&
                 Objects.equals(topic, section.topic) &&
-                Objects.equals(startDate, section.startDate) &&
-                Objects.equals(endDate, section.endDate) &&
                 Objects.equals(startTime, section.startTime) &&
                 Objects.equals(endTime, section.endTime);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, topic, startDate, endDate, startTime, endTime, maxAttendees, isAvailable);
+        return Objects.hash(id, topic, startTime, endTime, maxAttendees, isAvailable);
     }
 
     @Override
@@ -86,8 +71,6 @@ public class Section implements Identifiable {
         return "Section{" +
                 "id=" + id +
                 ", topic='" + topic + '\'' +
-                ", startDate=" + startDate +
-                ", endDate=" + endDate +
                 ", startTime=" + startTime +
                 ", endTime=" + endTime +
                 ", maxAttendees=" + maxAttendees +

@@ -21,4 +21,8 @@ public class DaoHelper implements AutoCloseable {
     public UserDao createUserDao(){
         return new UserDaoImpl(connection);
     }
+
+    public ConferenceDao createConferenceDao(){
+        return new ConferenceDaoImpl(connection);
+    }
 }

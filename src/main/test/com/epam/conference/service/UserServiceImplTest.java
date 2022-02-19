@@ -19,7 +19,9 @@ public class UserServiceImplTest {
         String login = "admin";
         String password = "admin";
 
-        ProxyConnection connection = ConnectionFactory.create();
+        ConnectionFactory connectionFactory = new ConnectionFactory();
+
+        ProxyConnection connection = connectionFactory.create();
 
         UserDao userDao = new UserDaoImpl(connection);
 

@@ -15,12 +15,14 @@ import java.util.Optional;
 public abstract class AbstractDao<T extends Identifiable> implements Dao {
 
     private final Connection connection;
+    private final Mapper<T> mapper;
 
-    public AbstractDao(Connection connection) {
+    public AbstractDao(Connection connection, Mapper<T> mapper) {
         this.connection = connection;
+        this.mapper = mapper;
     }
 
-    protected List<T> executeQuery(String query, Mapper<T> mapper, Object... params) throws DaoException {
+    protected List<T> executeQuery(String query, Object... params) throws DaoException {
         try (PreparedStatement preparedStatement = createStatement(query, params);
              ResultSet resultSet = preparedStatement.executeQuery()) {
             List<T> entities = new ArrayList<>();
@@ -57,8 +59,8 @@ public abstract class AbstractDao<T extends Identifiable> implements Dao {
         return executeQuery("select * from " + table, mapper);
     }
 
-    protected Optional<T> executeForSingleResult(String query, Mapper<T> mapper, Object... params) throws DaoException {
-        List<T> items = executeQuery(query, mapper, params);
+    protected Optional<T> executeForSingleResult(String query, Object... params) throws DaoException {
+        List<T> items = executeQuery(query, params);
         if (items.size() == 1) {
             return Optional.of(items.get(0));
         } else if (items.size() > 1) {
@@ -71,4 +73,23 @@ public abstract class AbstractDao<T extends Identifiable> implements Dao {
 
     protected abstract String getTableName();
 
+    @Override
+    public void create() throws DaoException {
+        PreparedStatement preparedStatement = createStatement("INSERT conference(topic, start_date, end_date,is_available,place) VALUES ('Java', '22.12.2022', '24.12.2022',true,'Minsk')");
+        try {
+            preparedStatement.execute("INSERT conference(topic, start_date, end_date,is_available,place) VALUES ('Java', '22.12.2022', '24.12.2022',true,'Minsk')");
+        } catch (SQLException e) {
+            throw new DaoException("Unable to create",e);
+        }
+    }
+
+    @Override
+    public void update() throws DaoException {
+
+    }
+
+    @Override
+    public void delete() throws DaoException {
+
+    }
 }

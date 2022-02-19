@@ -11,8 +11,6 @@ public class SectionMapper implements Mapper<Section> {
         return new Section(
                 resultSet.getLong("id"),
                 resultSet.getString("topic"),
-                resultSet.getDate("start_date"),
-                resultSet.getDate("end_date"),
                 resultSet.getTime("start_time"),
                 resultSet.getTime("end_time"),
                 resultSet.getInt("max_attendees"),

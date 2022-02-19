@@ -9,8 +9,9 @@ import java.util.concurrent.locks.ReentrantLock;
 public class ConnectionPool {
 
     private static ConnectionPool instance;
-    private final Queue<ProxyConnection> connectionPool;
+    private static Queue<ProxyConnection> connectionPool;
     private final Queue<ProxyConnection> connectionInUse = new ArrayDeque<>();
+    private static ConnectionFactory connectionFactory;
 
     private final ReentrantLock connectionLock = new ReentrantLock();
     private static final ReentrantLock connectionPoolLock = new ReentrantLock();
@@ -18,10 +19,6 @@ public class ConnectionPool {
     private static final int INITIAL_POOL_SIZE = 10;
 
     private ConnectionPool() {
-        this.connectionPool = new ArrayDeque<>(INITIAL_POOL_SIZE);
-        for (int i = 0; i < INITIAL_POOL_SIZE; i++) {
-            connectionPool.add(ConnectionFactory.create());
-        }
     }
 
     public static ConnectionPool getInstance() throws DatabaseConnectorException {
@@ -32,12 +29,21 @@ public class ConnectionPool {
                 localInstance = instance;
                 if (localInstance == null) {
                     instance = localInstance = new ConnectionPool();
+                    initConnectionPool();
                 }
             }
         } finally {
             connectionPoolLock.unlock();
         }
         return localInstance;
+    }
+
+    private static void initConnectionPool() {
+        connectionFactory = new ConnectionFactory();
+        connectionPool = new ArrayDeque<>(INITIAL_POOL_SIZE);
+        for (int i = 0; i < INITIAL_POOL_SIZE; i++) {
+            connectionPool.add(connectionFactory.create());
+        }
     }
 
     public void returnConnection(ProxyConnection proxyConnection) {
@@ -57,7 +63,7 @@ public class ConnectionPool {
         try {
             if (connectionPool.isEmpty()) {
                 if (connectionInUse.size() < 10) {
-                    connectionPool.add(ConnectionFactory.create());
+                    connectionPool.add(connectionFactory.create());
                 } else {
                     throw new RuntimeException("Maximum pool size, no available connections");
                 }
@@ -69,7 +75,7 @@ public class ConnectionPool {
             }
 
             if (connection != null && !connection.isValid(50)) {
-                connection = ConnectionFactory.create();
+                connection = connectionFactory.create();
             }
 
             connectionInUse.add(connection);
