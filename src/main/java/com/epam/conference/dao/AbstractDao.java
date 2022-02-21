@@ -1,10 +1,12 @@
 package com.epam.conference.dao;
 
+import com.epam.conference.connection.ConnectionPool;
+import com.epam.conference.connection.ProxyConnection;
 import com.epam.conference.entity.Identifiable;
 import com.epam.conference.exception.DaoException;
+import com.epam.conference.exception.DatabaseConnectorException;
 import com.epam.conference.mapper.Mapper;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -14,11 +16,11 @@ import java.util.Optional;
 
 public abstract class AbstractDao<T extends Identifiable> implements Dao {
 
-    private final Connection connection;
+    private final ProxyConnection proxyConnection;
     private final Mapper<T> mapper;
 
-    public AbstractDao(Connection connection, Mapper<T> mapper) {
-        this.connection = connection;
+    public AbstractDao(ProxyConnection proxyConnection, Mapper<T> mapper) {
+        this.proxyConnection = proxyConnection;
         this.mapper = mapper;
     }
 
@@ -35,13 +37,21 @@ public abstract class AbstractDao<T extends Identifiable> implements Dao {
             throw new DaoException("Unable to execute query where SQLState: " +
                     e.getSQLState() + "; Error code: " +
                     e.getErrorCode(), e);
+        } finally {
+
+            try {
+                ConnectionPool.getInstance().returnConnection(proxyConnection);
+            } catch (DatabaseConnectorException e) {
+                e.printStackTrace();
+            }
+
         }
     }
 
     private PreparedStatement createStatement(String query, Object... params) throws DaoException {
         PreparedStatement preparedStatement;
         try {
-            preparedStatement = connection.prepareStatement(query);
+            preparedStatement = proxyConnection.prepareStatement(query);
             for (int i = 1; i <= params.length; i++) {
                 preparedStatement.setObject(i, params[i - 1]);
             }
@@ -53,10 +63,10 @@ public abstract class AbstractDao<T extends Identifiable> implements Dao {
         return preparedStatement;
     }
 
-    public List<T> getAll() throws DaoException {
+    public List<T> getAll() throws DaoException, DatabaseConnectorException {
         String table = getTableName();
-        Mapper<T> mapper = (Mapper<T>) Mapper.createTable(table);
-        return executeQuery("select * from " + table, mapper);
+//        Mapper<T> mapper = (Mapper<T>) Mapper.createTable(table);
+        return executeQuery("select * from " + table);
     }
 
     protected Optional<T> executeForSingleResult(String query, Object... params) throws DaoException {
@@ -79,7 +89,7 @@ public abstract class AbstractDao<T extends Identifiable> implements Dao {
         try {
             preparedStatement.execute("INSERT conference(topic, start_date, end_date,is_available,place) VALUES ('Java', '22.12.2022', '24.12.2022',true,'Minsk')");
         } catch (SQLException e) {
-            throw new DaoException("Unable to create",e);
+            throw new DaoException("Unable to create", e);
         }
     }
 

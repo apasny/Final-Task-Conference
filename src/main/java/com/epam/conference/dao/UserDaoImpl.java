@@ -1,5 +1,6 @@
 package com.epam.conference.dao;
 
+import com.epam.conference.connection.ProxyConnection;
 import com.epam.conference.entity.User;
 import com.epam.conference.exception.DaoException;
 import com.epam.conference.mapper.UserMapper;
@@ -11,8 +12,8 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
 
     private static final String FIND_BY_LOGIN_AND_PASSWORD = "SELECT * FROM user WHERE login = ? AND password = ?";
 
-    public UserDaoImpl(Connection connection) {
-        super(connection, new UserMapper());
+    public UserDaoImpl(ProxyConnection proxyConnection) {
+        super(proxyConnection, new UserMapper());
     }
 
     @Override

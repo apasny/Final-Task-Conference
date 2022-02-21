@@ -1,9 +1,10 @@
 package com.epam.conference.entity;
 
+import java.io.Serializable;
 import java.sql.Date;
 import java.util.Objects;
 
-public class Conference implements Identifiable {
+public class Conference implements Identifiable, Serializable {
 
     public static final String TABLE = "conference";
 

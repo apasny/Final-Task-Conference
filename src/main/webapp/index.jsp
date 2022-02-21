@@ -8,7 +8,7 @@
         <body>
             <div class="login-page">
                 <main class="form">
-                    <form class="login-form" method="post" action="controller?command=login">
+                    <form class="login-form" method="post" action="main?command=login">
                         <h1 class="">Please sign in</h1>
                             <input name="login" type="text" class="form-control" id="floatingInput" placeholder="Login">
                             <input name="password" type="password" class="form-control" id="floatingPassword" placeholder="Password">

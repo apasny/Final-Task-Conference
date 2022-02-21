@@ -1,8 +1,9 @@
 package com.epam.conference.entity;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class User implements Identifiable {
+public class User implements Identifiable, Serializable {
 
     public static final String TABLE = "user";
 

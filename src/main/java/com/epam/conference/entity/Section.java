@@ -1,9 +1,10 @@
 package com.epam.conference.entity;
 
+import java.io.Serializable;
 import java.sql.Time;
 import java.util.Objects;
 
-public class Section implements Identifiable {
+public class Section implements Identifiable, Serializable {
 
     public static final String TABLE = "section";
 

@@ -1,9 +1,6 @@
 package com.epam.conference.mapper;
 
-import com.epam.conference.entity.Conference;
-import com.epam.conference.entity.Identifiable;
-import com.epam.conference.entity.Section;
-import com.epam.conference.entity.User;
+import com.epam.conference.entity.*;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -20,6 +17,8 @@ public interface Mapper<T> {
                 return new SectionMapper();
             case Conference.TABLE:
                 return new ConferenceMapper();
+            case Request.TABLE:
+                return new RequestMapper();
             default:
                 throw new IllegalArgumentException("Unknown table");
         }

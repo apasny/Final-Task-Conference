@@ -1,8 +1,13 @@
 package com.epam.conference.service;
 
+import com.epam.conference.entity.Conference;
 import com.epam.conference.exception.DaoException;
+import com.epam.conference.exception.ServiceException;
+
+import java.util.List;
 
 public interface ConferenceService {
     void create(String... params) throws DaoException;
     void delete();
+    List<Conference> conferences() throws ServiceException;
 }

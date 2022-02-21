@@ -1,9 +1,10 @@
 package com.epam.conference.entity;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Objects;
 
-public class Request implements Identifiable {
+public class Request implements Identifiable, Serializable {
 
     public static final String TABLE = "request";
 
