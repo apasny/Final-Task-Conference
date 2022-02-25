@@ -21,11 +21,24 @@ public class RequestsCommand implements Command{
     public String execute(HttpServletRequest req, HttpServletResponse resp) throws CommandException {
 
         ArrayList<Request> usersRequests;
-        try {
-            usersRequests = (ArrayList<Request>) requestService.requests();
-        } catch (ServiceException e) {
-            throw new CommandException("Unable to execute requests command" + e.getMessage(), e);
+
+        String userId = req.getSession().getAttribute("user_id").toString();
+        boolean role = (boolean)req.getSession().getAttribute("role");
+
+        if (role){
+            try {
+                usersRequests = (ArrayList<Request>) requestService.allRequests();
+            } catch (ServiceException e) {
+                throw new CommandException("Unable to execute requests command" + e.getMessage(), e);
+            }
+        } else {
+            try {
+                usersRequests = (ArrayList<Request>) requestService.userRequests(userId);
+            } catch (ServiceException e) {
+                throw new CommandException("Unable to execute User requests command" + e.getMessage(), e);
+            }
         }
+
         for (Request request : usersRequests) {
             Long id = request.getId();
             String topic=request.getTopic();

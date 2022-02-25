@@ -12,8 +12,6 @@ import org.junit.Test;
 import java.sql.SQLException;
 import java.util.List;
 
-import static org.junit.Assert.*;
-
 public class RequestServiceImplTest {
     @Test
     public void name() throws DatabaseConnectorException, SQLException, ServiceException {
@@ -22,9 +20,9 @@ public class RequestServiceImplTest {
             DaoHelper daoHelper = daoHelperFactory.create();
             RequestDao requestDao = daoHelper.createRequestDao();
             RequestService requestService = new RequestServiceImpl(requestDao);
-            List<Request> requests = requestService.requests();
+            List<Request> requests = requestService.allRequests();
 
-        Assert.assertEquals(requests.size(),3);
+        Assert.assertEquals(requests.size(),6);
 
     }
 }

@@ -17,8 +17,8 @@ public class ConferenceServiceImpl implements ConferenceService{
     }
 
     @Override
-    public void create(String... params) throws DaoException {
-        dao.createConference();
+    public void create(Conference conference) throws DaoException {
+        dao.createConference(conference);
     }
 
     @Override

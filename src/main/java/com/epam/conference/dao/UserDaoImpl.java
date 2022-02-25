@@ -1,11 +1,13 @@
 package com.epam.conference.dao;
 
 import com.epam.conference.connection.ProxyConnection;
+import com.epam.conference.entity.Conference;
 import com.epam.conference.entity.User;
 import com.epam.conference.exception.DaoException;
 import com.epam.conference.mapper.UserMapper;
 
-import java.sql.Connection;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Optional;
 
 public class UserDaoImpl extends AbstractDao<User> implements UserDao {
@@ -31,18 +33,15 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
         return User.TABLE;
     }
 
-    @Override
-    public void create() {
-
-    }
 
     @Override
-    public void update() {
-
-    }
-
-    @Override
-    public void delete() {
-
+    protected Map<String, Object> getFields(User item) {
+        Map<String, Object> userFields = new LinkedHashMap<>();
+        userFields.put(User.ID,item.getId());
+        userFields.put(User.NAME,item.getName());
+        userFields.put(User.SURNAME,item.getSurname());
+        userFields.put(User.LOGIN,item.getLogin());
+        userFields.put(User.ISADMIN,item.isAdmin());
+        return userFields;
     }
 }

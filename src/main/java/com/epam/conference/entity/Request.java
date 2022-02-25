@@ -7,6 +7,12 @@ import java.util.Objects;
 public class Request implements Identifiable, Serializable {
 
     public static final String TABLE = "request";
+    public static final String ID = "id";
+    public static final String TOPIC = "topic";
+    public static final String TIME = "time";
+    public static final String USER_ID = "user_id";
+    public static final String SECTION_ID = "section_id";
+    public static final String STATUS = "status";
 
     private final Long id;
     private final String topic;

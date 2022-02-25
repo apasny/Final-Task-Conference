@@ -6,6 +6,7 @@ import com.epam.conference.exception.CommandException;
 import com.epam.conference.exception.ServiceException;
 import com.epam.conference.service.UserService;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Optional;

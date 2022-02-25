@@ -55,6 +55,8 @@ public class CommandFactory {
                 requestDao = daoHelper.createRequestDao();
                 requestService = new RequestServiceImpl(requestDao);
                 return new RequestsCommand(requestService);
+            case "/logout":
+                return new LogoutCommand();
 //            case "/create-conference":
 ////                userPath = "/create-conference";
 //                break;

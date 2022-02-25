@@ -12,7 +12,7 @@ import java.util.Date;
 
 public class ConferencesCommand implements Command {
 
-   private final ConferenceService conferenceService;
+    private final ConferenceService conferenceService;
 
     public ConferencesCommand(ConferenceService conferenceService) {
         this.conferenceService = conferenceService;
@@ -21,6 +21,7 @@ public class ConferencesCommand implements Command {
     @Override
     public String execute(HttpServletRequest req, HttpServletResponse resp) throws CommandException {
         ArrayList<Conference> conferences;
+
         try {
             conferences = (ArrayList<Conference>) conferenceService.conferences();
         } catch (ServiceException e) {
@@ -28,13 +29,13 @@ public class ConferencesCommand implements Command {
         }
         for (Conference conference : conferences) {
             Long id = conference.getId();
-            String topic=conference.getTopic();
+            String topic = conference.getTopic();
             Date date = conference.getStartDate();
             String place = conference.getPlace();
-            req.setAttribute("conferenceId",id);
-            req.setAttribute("topic",topic);
-            req.setAttribute("startDate",date);
-            req.setAttribute("place",place);
+            req.setAttribute("conferenceId", id);
+            req.setAttribute("topic", topic);
+            req.setAttribute("startDate", date);
+            req.setAttribute("place", place);
         }
         req.setAttribute("conferences", conferences);
 

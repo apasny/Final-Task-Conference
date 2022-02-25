@@ -8,5 +8,6 @@ import java.util.List;
 public interface RequestDao {
 
     List<Request> getAllRequests() throws DaoException;
+    List<Request> getUserRequests(String userId) throws DaoException;
 
 }

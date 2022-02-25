@@ -12,7 +12,7 @@
       <a href="#"><img src="static/img/globe-32.png"></a>
     </div>
     <div class="logout">
-      <a href="#"><img src="static/img/logout-24.png"></a>
+      <a href="logout"><img src="static/img/logout-24.png"></a>
     </div>
   </div>
 </div>

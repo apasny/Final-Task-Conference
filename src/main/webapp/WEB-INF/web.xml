@@ -31,6 +31,10 @@
         <servlet-name>main</servlet-name>
         <url-pattern>/create-section</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>main</servlet-name>
+        <url-pattern>/logout</url-pattern>
+    </servlet-mapping>
 
     <session-config>
         <session-timeout>1</session-timeout>

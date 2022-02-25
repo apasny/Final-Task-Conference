@@ -7,6 +7,12 @@ import java.util.Objects;
 public class Conference implements Identifiable, Serializable {
 
     public static final String TABLE = "conference";
+    public static final String ID = "id";
+    public static final String TOPIC = "topic";
+    public static final String STARTDATE = "start_date";
+    public static final String ENDDATE = "end_date";
+    public static final String PLACE = "place";
+    public static final String ISAVAILABLE = "is_available";
 
     private final Long id;
     private final String topic;

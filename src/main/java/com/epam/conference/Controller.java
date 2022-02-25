@@ -84,6 +84,10 @@ public class Controller extends HttpServlet {
             throw new ControllerException("Unable to execute " + this.getClass() + ".processGetRequest() " + e.getMessage(), e);
         }
 
+        if (responsePath == null) {
+            req.getRequestDispatcher("index.jsp").forward(req, resp);
+        }
+
         String url = "/WEB-INF/view" + responsePath + ".jsp";
 
         req.getRequestDispatcher(url).forward(req, resp);

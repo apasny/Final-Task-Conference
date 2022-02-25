@@ -16,10 +16,22 @@ public class RequestServiceImpl implements RequestService {
     }
 
     @Override
-    public List<Request> requests() throws ServiceException {
+    public List<Request> allRequests() throws ServiceException {
         List<Request> requests;
         try {
             requests = dao.getAllRequests();
+        } catch (DaoException e) {
+            throw new ServiceException("Cannot get requests" + e.getMessage(),e);
+        }
+
+        return requests;
+    }
+
+    @Override
+    public List<Request> userRequests(String userId) throws ServiceException {
+        List<Request> requests;
+        try {
+            requests = dao.getUserRequests(userId);
         } catch (DaoException e) {
             throw new ServiceException("Cannot get requests" + e.getMessage(),e);
         }

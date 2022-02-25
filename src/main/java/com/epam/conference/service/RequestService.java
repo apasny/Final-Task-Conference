@@ -7,6 +7,7 @@ import java.util.List;
 
 public interface RequestService {
 
-    List<Request> requests() throws ServiceException;
+    List<Request> allRequests() throws ServiceException;
+    List<Request> userRequests(String userId) throws ServiceException;
 
 }

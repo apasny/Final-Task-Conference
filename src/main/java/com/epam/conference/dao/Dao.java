@@ -2,9 +2,9 @@ package com.epam.conference.dao;
 
 import com.epam.conference.exception.DaoException;
 
-public interface Dao {
+public interface Dao<T> {
 
-    void create() throws DaoException;
+    boolean create(T item) throws DaoException;
     void update() throws DaoException;
     void delete() throws DaoException;
 
