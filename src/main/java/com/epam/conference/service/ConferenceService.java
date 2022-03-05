@@ -8,6 +8,6 @@ import java.util.List;
 
 public interface ConferenceService {
     void create(Conference conference) throws DaoException;
-    void delete();
+    void delete(Long id) throws ServiceException;
     List<Conference> conferences() throws ServiceException;
 }

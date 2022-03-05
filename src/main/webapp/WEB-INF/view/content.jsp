@@ -10,11 +10,11 @@
         <div class="conferences-content">
           <c:forEach var="item" items="${conferences}">
             <c:choose>
-              <c:when test='<%= (boolean)session.getAttribute("role") %>'>
+              <c:when test="${isAdmin}">
                 <div class="conference">
                   <p>CONFERENCE topic:<c:out value="${item.topic}"/></p>
                   <p>ID:<c:out value="${item.id}"/>, PLACE:<c:out value="${item.place}"/></p>
-                  <div class="btn btn-request cancel" type="submit">Delete</div>
+                  <div class="btn btn-request cancel" type="submit" action="main?command=delete&id=${item.id}">Delete</div>
                 </div>
               </c:when>
               <c:otherwise>
@@ -37,12 +37,12 @@
               <p>Request from USER.NAME USER.SURNAME</p>
               <p>CONFERENCE topic: <c:out value="${item.topic}"/>, ID:<c:out value="${item.id}"/></p>
               <c:choose>
-               <c:when test = '<%= (boolean)session.getAttribute("role") %>'>
-                <div class="btn btn-request accept" type="submit">Accept</div>
-                <div class="btn btn-request cancel" type="submit">Decline</div>
+               <c:when test = "${isAdmin}">
+                <div class="btn btn-request accept" type="submit" action="controller?command=accept">Accept</div>
+                <div class="btn btn-request cancel" type="submit" action="controller?command=decline">Decline</div>
               </c:when>
               <c:otherwise>
-                <div class="btn btn-request cancel" type="submit">Cancel</div>
+                <div class="btn btn-request cancel" type="submit" action="controller?command=cancel">Cancel</div>
               </c:otherwise>
             </c:choose>
           </div>
@@ -52,7 +52,19 @@
 
     <c:if test='<%= request.getServletPath().equals("/WEB-INF/view/create-conference.jsp") %>'>
       <div class="create-content">  
-        <form method="post" action="controller?command=create">
+        <form method="post" action="controller?command=create-conference">
+          <input class="data-input" type="text" name="topic" placeholder="topic" required/>
+          <input class="data-input" type="date" name="start-date" placeholder="" required />
+          <input class="data-input" type="date" name="end-date" placeholder="" required/>
+          <input class="data-input" type="text" name="place" placeholder="place" required/>
+          <button class="btn apply" type="submit">Create</button>
+        </form>
+      </div>
+    </c:if>
+
+    <c:if test='<%= request.getServletPath().equals("/WEB-INF/view/create-section.jsp") %>'>
+      <div class="create-content">
+        <form method="post" action="controller?command=create-section">
           <input class="data-input" type="text" name="topic" placeholder="topic" required/>
           <input class="data-input" type="date" name="start-date" placeholder="" required />
           <input class="data-input" type="date" name="end-date" placeholder="" required/>

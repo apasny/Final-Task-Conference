@@ -22,8 +22,12 @@ public class ConferenceServiceImpl implements ConferenceService{
     }
 
     @Override
-    public void delete() {
-
+    public void delete(Long id) throws ServiceException {
+        try {
+            dao.deleteConference(id);
+        } catch (DaoException e) {
+            throw new ServiceException("Unable to delete conference", e);
+        }
     }
 
     @Override

@@ -1,13 +1,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html; charset=UTF-8" isELIgnored="false" language="java"%>
 <%@ page import = "java.io.*,java.util.*" %>
 
-<fmt:setLocale value="<%= request.getLocale().getLanguage() %>" />
-<fmt:setBundle basename="pagecontent" />
-
 <!DOCTYPE html>
-<html lang="<%= request.getLocale().getLanguage() %>"">
+<html lang="en">
 <title>Conference</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">

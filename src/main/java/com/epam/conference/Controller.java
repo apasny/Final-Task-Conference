@@ -2,25 +2,14 @@ package com.epam.conference;
 
 import com.epam.conference.command.Command;
 import com.epam.conference.command.CommandFactory;
-import com.epam.conference.dao.DaoHelper;
-import com.epam.conference.dao.DaoHelperFactory;
-import com.epam.conference.dao.RequestDao;
-import com.epam.conference.entity.Request;
 import com.epam.conference.exception.CommandException;
 import com.epam.conference.exception.ControllerException;
-import com.epam.conference.exception.DatabaseConnectorException;
-import com.epam.conference.exception.ServiceException;
-import com.epam.conference.service.RequestService;
-import com.epam.conference.service.RequestServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Controller extends HttpServlet {
 

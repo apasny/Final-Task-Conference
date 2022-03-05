@@ -44,7 +44,7 @@ public class User implements Identifiable, Serializable {
         return login;
     }
 
-    public boolean isAdmin() {
+    public boolean getIsAdmin() {
         return isAdmin;
     }
 

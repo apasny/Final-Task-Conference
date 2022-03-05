@@ -85,6 +85,20 @@ public abstract class AbstractDao<T extends Identifiable> implements Dao<T> {
         return executeQuery("select * from " + table + " where " + columnName + "='" + columnValue + "'");
     }
 
+    protected List<T> executeForColumnResultWithJoin(String columnName, String columnValue, String joinTableName, String joinColumnName) throws DaoException {
+        String table = getTableName();
+        return executeQuery("select * from " + table + " where " + columnName + "='" + columnValue + "' INNER JOIN "+ joinTableName + " ON "+ columnName+ "=" +joinColumnName);
+    }
+
+    protected boolean executeDelete(Long id) throws DaoException {
+        String table = getTableName();
+        try (PreparedStatement preparedStatement = createStatement("delete from "+table+" where id="+id)) {
+            return preparedStatement.executeUpdate()> 0;
+        } catch (SQLException exception) {
+            throw new DaoException("Unable to execute update query", exception);
+        }
+    }
+
     protected boolean executeUpdate(String query) throws DaoException {
         try (PreparedStatement preparedStatement = createStatement(query)) {
             return preparedStatement.executeUpdate() > 0;

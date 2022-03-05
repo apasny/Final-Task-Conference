@@ -1,6 +1,7 @@
 package com.epam.conference.command;
 
 import com.epam.conference.entity.Request;
+import com.epam.conference.entity.User;
 import com.epam.conference.exception.CommandException;
 import com.epam.conference.exception.ServiceException;
 import com.epam.conference.service.RequestService;
@@ -22,8 +23,9 @@ public class RequestsCommand implements Command{
 
         ArrayList<Request> usersRequests;
 
-        String userId = req.getSession().getAttribute("user_id").toString();
-        boolean role = (boolean)req.getSession().getAttribute("role");
+        User user = (User)req.getSession().getAttribute("user");
+        String userId = user.getId().toString();
+        boolean role = user.getIsAdmin();
 
         if (role){
             try {

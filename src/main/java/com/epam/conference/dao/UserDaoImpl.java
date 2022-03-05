@@ -1,7 +1,6 @@
 package com.epam.conference.dao;
 
 import com.epam.conference.connection.ProxyConnection;
-import com.epam.conference.entity.Conference;
 import com.epam.conference.entity.User;
 import com.epam.conference.exception.DaoException;
 import com.epam.conference.mapper.UserMapper;
@@ -41,7 +40,7 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
         userFields.put(User.NAME,item.getName());
         userFields.put(User.SURNAME,item.getSurname());
         userFields.put(User.LOGIN,item.getLogin());
-        userFields.put(User.ISADMIN,item.isAdmin());
+        userFields.put(User.ISADMIN,item.getIsAdmin());
         return userFields;
     }
 }

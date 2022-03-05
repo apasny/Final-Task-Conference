@@ -4,11 +4,13 @@
 <!--HEADER-->
 <div class="header">
   <div class="logo">
-    <a href="#">conferences</a>
+    <a href="main">conferences</a>
   </div>
   <div class="icons-container">
     <div class="lang">
-      <span>Ru</span>
+      <a href="?lang=ru">RU</a>
+      <a href="?lang=en">EN</a>
+      <a href="?lang=by">BY</a>
       <a href="#"><img src="static/img/globe-32.png"></a>
     </div>
     <div class="logout">

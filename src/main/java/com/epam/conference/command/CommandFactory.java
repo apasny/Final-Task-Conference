@@ -47,6 +47,10 @@ public class CommandFactory {
                 conferenceDao = daoHelper.createConferenceDao();
                 conferenceService = new ConferenceServiceImpl(conferenceDao);
                 return new CreateCommand(conferenceService);
+            case "delete":
+                conferenceDao = daoHelper.createConferenceDao();
+                conferenceService = new ConferenceServiceImpl(conferenceDao);
+                return new DeleteCommand(conferenceService);
             case "/conferences":
                 conferenceDao = daoHelper.createConferenceDao();
                 conferenceService = new ConferenceServiceImpl(conferenceDao);
@@ -57,12 +61,10 @@ public class CommandFactory {
                 return new RequestsCommand(requestService);
             case "/logout":
                 return new LogoutCommand();
-//            case "/create-conference":
-////                userPath = "/create-conference";
-//                break;
-//            case "/create-section":
-////                userPath = "/create-section";
-//                break;
+            case "/create-conference":
+                return new CreateConferenceCommand();
+            case "/create-section":
+                return new CreateSectionCommand();
             default:
                 throw new IllegalArgumentException("Unknown command = " + command);
         }

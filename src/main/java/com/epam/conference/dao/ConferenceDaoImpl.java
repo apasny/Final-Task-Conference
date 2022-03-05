@@ -31,6 +31,11 @@ public class ConferenceDaoImpl extends AbstractDao<Conference> implements Confer
     }
 
     @Override
+    public void deleteConference(Long id) throws DaoException {
+        executeDelete(id);
+    }
+
+    @Override
     protected String getTableName() {
         return Conference.TABLE;
     }

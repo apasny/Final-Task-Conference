@@ -3,6 +3,8 @@ package com.epam.conference.dao;
 import com.epam.conference.connection.ConnectionPool;
 import com.epam.conference.connection.ProxyConnection;
 import com.epam.conference.entity.Conference;
+import com.epam.conference.entity.Section;
+import com.epam.conference.entity.User;
 import com.epam.conference.exception.DaoException;
 import com.epam.conference.exception.DatabaseConnectorException;
 import org.junit.Assert;
