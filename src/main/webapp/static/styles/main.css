@@ -1,0 +1,217 @@
+html, body {
+	height: 100%;
+	background-color: #F2F8F9;
+}
+
+.container {
+	font-family: "Roboto", sans-serif;
+	background-color: #F2F8F9;
+}
+
+.header {
+	position: relative;
+	height: 70px;
+	background: #5399D7; /* fallback for old browsers */
+	background: -webkit-linear-gradient(right, #62A5BF, #5399D7);
+	background: -moz-linear-gradient(right, #62A5BF, #5399D7);
+	background: -o-linear-gradient(right, #62A5BF, #5399D7);
+	background: linear-gradient(to left, #62A5BF, #5399D7);
+	font-family: "Roboto", sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;    
+}
+
+a, a:hover, a:focus, a:active {
+	text-decoration: none;
+	color: inherit;
+	outline: 0;
+}
+
+.logo a {
+	font-size: 30px;
+	color: #FFF;
+	padding: 20px;
+	text-transform: uppercase;
+	float: left;
+}
+
+.icons-container {
+	position: absolute;
+	height: 32px;
+	top: 50%;
+	right: 0;
+	margin-top: -16px;
+}
+
+.lang,.logout {
+	display: inline-block;
+	padding-right: 20px;
+}
+
+.lang span {
+	color: #FFF;
+}
+
+.navbar {
+	height: 40px;
+	background-color: #C4C4C4;
+}
+
+.ul {
+	overflow: hidden;
+}
+
+.ul, .li {
+	height: inherit;
+}
+
+.li {
+	display: inline-block;
+	float: left;
+}
+
+.ul .li a {
+	color: #000;
+	font-size: 14px;
+	padding: 13px 20px;
+	display: inline-block;
+	text-align: left;
+}
+
+.ul .li a:hover {
+	background-color: #FFF;
+}
+.ul .li a:active {
+	background-color: #FFF;
+	text-decoration: underline;
+}
+/*.ul .li a:focus {
+	background-color: #FFF;
+	text-decoration: underline;
+}*/
+
+.footer {
+	background-color: #737373;
+	height: 70px;
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+}
+
+.content form {
+	background-color: #FFF;
+}
+
+.data-input {
+	display: block;
+	padding: 5px;
+	margin: 20px ;
+}
+
+.btn {
+	width: 150px;
+	height: 40px;
+	text-align: center;
+	color: #FFF;
+	font-size: 14px;
+	border: none;
+}
+
+.apply,.accept {
+	background-color: #62BF6B;
+}
+
+.apply:hover,.accept:hover {
+	background-color: #5DAC65;
+	cursor: pointer;
+}
+
+.btn-request {
+	position: absolute;
+	top: 0;
+	margin-top: 23px;
+	line-height: 40px;
+}
+
+.cancel {
+	background-color: #D66464;
+	margin-top: 23px;
+	right: 20px;
+	line-height: 40px;
+}
+
+.cancel:hover {
+	background-color: #BF6262;
+	cursor: pointer;
+}
+
+.accept {
+	right: 180px;
+}
+
+.apply {
+	right: 20px;
+}
+
+.dropbtn {
+  display: inline-block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #C4C4C4;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.ul .li .dropdown-content a {
+  display: block;
+}
+
+.dropdown-content a:hover {
+	background-color: #f1f1f1;
+	cursor: pointer;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+  cursor: pointer;
+}
+
+.requests-content,.conferences-content {
+	margin: auto;
+	padding: 0 20px;
+}
+
+.request,.conference {
+	margin: 15px auto;
+	position: relative;
+	background: #DCDCDC;
+}
+
+.request p:first-child,
+.conference p:first-child {
+	padding-bottom: 5px;
+	padding-top: 20px;
+	padding-left: 25px;
+}
+
+.request p+p,
+.conference p+p {
+	padding-top: 5px;
+	padding-bottom: 20px;
+	padding-left: 25px;
+}
+
+/*RESPONSIVE*/
+@media only screen and (max-width: 600px) {
+  body {
+    background-color: lightblue;
+  }
+}
