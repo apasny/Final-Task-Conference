@@ -13,6 +13,7 @@ public class Conference implements Identifiable, Serializable {
     public static final String ENDDATE = "end_date";
     public static final String PLACE = "place";
     public static final String ISAVAILABLE = "is_available";
+    public static final String ISDELETED = "is_deleted";
 
     private final Long id;
     private final String topic;
@@ -20,16 +21,20 @@ public class Conference implements Identifiable, Serializable {
     private final Date endDate;
     private final String place;
     private final boolean isAvailable;
+    private final boolean isDeleted;
 
-    public Conference(Long id, String topic, Date startDate, Date endDate, String place, boolean isAvailable) {
+    public Conference(Long id, String topic, Date startDate, Date endDate, String place, boolean isAvailable, boolean isDeleted) {
         this.id = id;
         this.topic = topic;
         this.startDate = startDate;
         this.endDate = endDate;
         this.place = place;
         this.isAvailable = isAvailable;
+        this.isDeleted = isDeleted;
+
     }
 
+    @Override
     public Long getId() {
         return id;
     }
@@ -50,8 +55,12 @@ public class Conference implements Identifiable, Serializable {
         return place;
     }
 
-    public boolean isAvailable() {
+    public boolean getIsAvailable() {
         return isAvailable;
+    }
+
+    public boolean getIsDeleted() {
+        return isDeleted;
     }
 
     @Override
@@ -60,6 +69,7 @@ public class Conference implements Identifiable, Serializable {
         if (object == null || getClass() != object.getClass()) return false;
         Conference that = (Conference) object;
         return isAvailable == that.isAvailable &&
+                isDeleted == that.isDeleted &&
                 Objects.equals(id, that.id) &&
                 Objects.equals(topic, that.topic) &&
                 Objects.equals(startDate, that.startDate) &&
@@ -69,7 +79,7 @@ public class Conference implements Identifiable, Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, topic, startDate, endDate, place, isAvailable);
+        return Objects.hash(id, topic, startDate, endDate, place, isAvailable, isDeleted);
     }
 
     @Override
@@ -81,6 +91,7 @@ public class Conference implements Identifiable, Serializable {
                 ", endDate=" + endDate +
                 ", place='" + place + '\'' +
                 ", isAvailable=" + isAvailable +
+                ", isAvailable=" + isDeleted +
                 '}';
     }
 }

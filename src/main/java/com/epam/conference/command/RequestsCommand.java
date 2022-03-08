@@ -43,12 +43,10 @@ public class RequestsCommand implements Command{
 
         for (Request request : usersRequests) {
             Long id = request.getId();
-            String topic=request.getTopic();
             req.setAttribute("conferenceId",id);
-            req.setAttribute("topic",topic);
         }
         req.setAttribute("usersRequests", usersRequests);
 
-        return "/requests";
+        return "WEB-INF/view/requests.jsp";
     }
 }

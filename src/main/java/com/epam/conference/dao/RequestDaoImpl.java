@@ -40,7 +40,6 @@ public class RequestDaoImpl extends AbstractDao<Request> implements RequestDao {
     protected Map<String, Object> getFields(Request item) {
         Map<String, Object> requestFields = new LinkedHashMap<>();
         requestFields.put(Request.ID,item.getId());
-        requestFields.put(Request.TOPIC,item.getTopic());
         requestFields.put(Request.TIME,item.getTime());
         requestFields.put(Request.USER_ID,item.getUserId());
         requestFields.put(Request.SECTION_ID,item.getSectionId());

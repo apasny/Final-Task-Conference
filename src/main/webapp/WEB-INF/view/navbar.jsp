@@ -13,16 +13,16 @@
    <c:when test = "${isAdmin}">
     <div class="ul">
         <div class="li">
-            <a href="requests"><fmt:message key="nav.requests" /></a>
+            <a href="?command=requests"><fmt:message key="nav.requests" /></a>
         </div>
         <div class="li">
-            <a href="conferences"><fmt:message key="nav.conferences" /></a>
+            <a href="?command=conferences"><fmt:message key="nav.conferences" /></a>
         </div>
         <div class="li dropdown">
             <a class="dropbtn"><fmt:message key="nav.create" /></a>
             <div class="dropdown-content">
-              <a href="create-conference"><fmt:message key="nav.conference" /></a>
-              <a href="create-section"><fmt:message key="nav.section" /></a>
+              <a href="?command=conference-creation"><fmt:message key="nav.conference" /></a>
+              <a href="?command=section-creation"><fmt:message key="nav.section" /></a>
           </div>
       </div>
   </div>

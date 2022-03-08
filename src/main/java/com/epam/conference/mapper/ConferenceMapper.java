@@ -5,7 +5,7 @@ import com.epam.conference.entity.Conference;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class ConferenceMapper implements Mapper<Conference>{
+public class ConferenceMapper implements Mapper<Conference> {
     @Override
     public Conference map(ResultSet resultSet) throws SQLException {
         return new Conference(
@@ -14,7 +14,8 @@ public class ConferenceMapper implements Mapper<Conference>{
                 resultSet.getDate("start_date"),
                 resultSet.getDate("end_date"),
                 resultSet.getString("place"),
-                resultSet.getBoolean("is_available")
+                resultSet.getBoolean("is_available"),
+                resultSet.getBoolean("is_deleted")
         );
     }
 }

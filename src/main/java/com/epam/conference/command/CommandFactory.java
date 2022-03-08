@@ -1,17 +1,20 @@
 package com.epam.conference.command;
 
 import com.epam.conference.dao.*;
-import com.epam.conference.entity.Request;
 import com.epam.conference.exception.CommandException;
-import com.epam.conference.exception.ControllerException;
 import com.epam.conference.exception.DatabaseConnectorException;
-import com.epam.conference.exception.ServiceException;
 import com.epam.conference.service.*;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 public class CommandFactory {
+
+    private static final String LOGIN = "login";
+    private static final String APPLY = "apply";
+    private static final String CANCEL = "cancel";
+    private static final String DECLINE = "decline";
+    private static final String CREATE_CONFERENCE = "create-conference";
+    private static final String DELETE = "delete";
 
     public Command createCommand(String command) throws CommandException {
 
@@ -24,7 +27,6 @@ public class CommandFactory {
         RequestDao requestDao;
         RequestService requestService;
 
-
         try {
             daoHelperFactory = new DaoHelperFactory();
             daoHelper = daoHelperFactory.create();
@@ -33,38 +35,40 @@ public class CommandFactory {
         }
 
         switch (command) {
-            case "login":
+            case LOGIN:
                 userDao = daoHelper.createUserDao();
                 userService = new UserServiceImpl(userDao);
                 return new LoginCommand(userService);
-            case "apply":
+            case APPLY:
                 return new ApplyCommand();
-            case "cancel":
+            case CANCEL:
                 return new CancelCommand();
-            case "decline":
+            case DECLINE:
                 return new DeclineCommand();
-            case "create":
+            case CREATE_CONFERENCE:
                 conferenceDao = daoHelper.createConferenceDao();
                 conferenceService = new ConferenceServiceImpl(conferenceDao);
-                return new CreateCommand(conferenceService);
-            case "delete":
+                return new CreateConferenceCommand(conferenceService);
+            case DELETE:
                 conferenceDao = daoHelper.createConferenceDao();
                 conferenceService = new ConferenceServiceImpl(conferenceDao);
                 return new DeleteCommand(conferenceService);
-            case "/conferences":
+            case "conferences":
                 conferenceDao = daoHelper.createConferenceDao();
                 conferenceService = new ConferenceServiceImpl(conferenceDao);
                 return new ConferencesCommand(conferenceService);
-            case "/requests":
+            case "requests":
                 requestDao = daoHelper.createRequestDao();
                 requestService = new RequestServiceImpl(requestDao);
                 return new RequestsCommand(requestService);
-            case "/logout":
+            case "logout":
                 return new LogoutCommand();
-            case "/create-conference":
-                return new CreateConferenceCommand();
-            case "/create-section":
-                return new CreateSectionCommand();
+            case "conference-creation":
+                return new CreateConferencePage();
+            case "section-creation":
+                conferenceDao = daoHelper.createConferenceDao();
+                conferenceService = new ConferenceServiceImpl(conferenceDao);
+                return new CreateSectionPage(conferenceService);
             default:
                 throw new IllegalArgumentException("Unknown command = " + command);
         }

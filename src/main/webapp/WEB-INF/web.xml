@@ -25,11 +25,11 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>main</servlet-name>
-        <url-pattern>/create-conference</url-pattern>
+        <url-pattern>/conference-creation</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>main</servlet-name>
-        <url-pattern>/create-section</url-pattern>
+        <url-pattern>/section-creation</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>main</servlet-name>

@@ -3,7 +3,7 @@
 <%@ page import = "java.io.*,java.util.*" %>
 
 <c:set var="usersRequests" value='<%= request.getAttribute("usersRequests")%>'/>
-  <c:set var="conferences" value='<%= request.getAttribute("conferences")%>'/>
+<c:set var="conferences" value='<%= request.getAttribute("conferences")%>'/>
 
     <div class="content">
       <c:if test='<%= request.getServletPath().equals("/WEB-INF/view/conferences.jsp") %>'>
@@ -52,7 +52,7 @@
 
     <c:if test='<%= request.getServletPath().equals("/WEB-INF/view/create-conference.jsp") %>'>
       <div class="create-content">  
-        <form method="post" action="controller?command=create-conference">
+        <form method="post" action="main?command=create-conference">
           <input class="data-input" type="text" name="topic" placeholder="topic" required/>
           <input class="data-input" type="date" name="start-date" placeholder="" required />
           <input class="data-input" type="date" name="end-date" placeholder="" required/>
@@ -64,11 +64,17 @@
 
     <c:if test='<%= request.getServletPath().equals("/WEB-INF/view/create-section.jsp") %>'>
       <div class="create-content">
-        <form method="post" action="controller?command=create-section">
+        <form method="post" action="main?command=create-section">
+        <select name="conference" id="conference">
+        <c:forEach var="item" items="${conferences}">
+          <option value="${item.topic}"><c:out value="${item.topic}"/></option>
+          <input class="hidden" type="hidden" name="id" value="${item.id}" required/>
+         </c:forEach>
+        </select>
           <input class="data-input" type="text" name="topic" placeholder="topic" required/>
-          <input class="data-input" type="date" name="start-date" placeholder="" required />
-          <input class="data-input" type="date" name="end-date" placeholder="" required/>
-          <input class="data-input" type="text" name="place" placeholder="place" required/>
+          <input class="data-input" type="time" name="start-time" placeholder="" required />
+          <input class="data-input" type="time" name="end-time" placeholder="" required/>
+          <input class="data-input" type="number" name="max-attendees" placeholder="attendees" min="1" value="1" required/>
           <button class="btn apply" type="submit">Create</button>
         </form>
       </div>

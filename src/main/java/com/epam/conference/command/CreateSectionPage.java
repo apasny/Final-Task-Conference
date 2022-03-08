@@ -10,11 +10,11 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class ConferencesCommand implements Command {
+public class CreateSectionPage implements Command {
 
     private final ConferenceService conferenceService;
 
-    public ConferencesCommand(ConferenceService conferenceService) {
+    public CreateSectionPage(ConferenceService conferenceService) {
         this.conferenceService = conferenceService;
     }
 
@@ -25,20 +25,16 @@ public class ConferencesCommand implements Command {
         try {
             conferences = (ArrayList<Conference>) conferenceService.conferences();
         } catch (ServiceException e) {
-            throw new CommandException("Unable to execute requests command" + e.getMessage(), e);
+            throw new CommandException("Unable to execute create section command" + e.getMessage(), e);
         }
         for (Conference conference : conferences) {
             Long id = conference.getId();
             String topic = conference.getTopic();
-            Date date = conference.getStartDate();
-            String place = conference.getPlace();
             req.setAttribute("conferenceId", id);
             req.setAttribute("topic", topic);
-            req.setAttribute("startDate", date);
-            req.setAttribute("place", place);
         }
         req.setAttribute("conferences", conferences);
 
-        return "WEB-INF/view/conferences.jsp";
+        return "WEB-INF/view/create-section.jsp";
     }
 }
