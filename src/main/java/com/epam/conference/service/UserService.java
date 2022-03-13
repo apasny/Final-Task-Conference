@@ -9,4 +9,5 @@ public interface UserService {
 
     Optional<User> login(String login, String password) throws ServiceException;
 
+    void close() throws ServiceException;
 }

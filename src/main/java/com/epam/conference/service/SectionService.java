@@ -1,15 +1,16 @@
 package com.epam.conference.service;
 
-import com.epam.conference.entity.Conference;
+import com.epam.conference.entity.Section;
 import com.epam.conference.exception.DaoException;
 import com.epam.conference.exception.ServiceException;
 
 import java.util.List;
 
-public interface ConferenceService {
-    void create(Conference conference) throws ServiceException;
+public interface SectionService {
+
+    void create(Section section) throws ServiceException;
     void delete(Long id) throws ServiceException;
-    List<Conference> conferences() throws ServiceException;
+    List<Section> sections(String id) throws ServiceException;
 
     void close() throws ServiceException;
 }

@@ -10,4 +10,7 @@ public interface RequestDao {
     List<Request> getAllRequests() throws DaoException;
     List<Request> getUserRequests(String userId) throws DaoException;
 
+    void close() throws DaoException;
+
+    void apply(Request request) throws DaoException;
 }

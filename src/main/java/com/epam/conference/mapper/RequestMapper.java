@@ -10,7 +10,6 @@ public class RequestMapper implements Mapper<Request> {
     public Request map(ResultSet resultSet) throws SQLException {
         return new Request(
                 resultSet.getLong("id"),
-                resultSet.getTimestamp("time"),
                 resultSet.getLong("user_id"),
                 resultSet.getLong("section_id"),
                 resultSet.getString("status")

@@ -28,6 +28,11 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
     }
 
     @Override
+    public void close() throws DaoException {
+        closeConnection();
+    }
+
+    @Override
     protected String getTableName() {
         return User.TABLE;
     }

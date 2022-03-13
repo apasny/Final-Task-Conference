@@ -23,7 +23,15 @@
     <jsp:include page="navbar.jsp" />
 
     <!--CONTENT-->
-    <jsp:include page="content.jsp" />
+    <div class="create-content">
+      <form method="post" action="main?command=create-conference">
+        <input class="data-input" type="text" name="topic" placeholder="topic" required/>
+        <input class="data-input" type="date" name="start-date" placeholder="" required />
+        <input class="data-input" type="date" name="end-date" placeholder="" required/>
+        <input class="data-input" type="text" name="place" placeholder="place" required/>
+        <button class="btn create" type="submit">Create</button>
+      </form>
+    </div>
 
     <!--FOOTER-->
     <jsp:include page="footer.jsp" />

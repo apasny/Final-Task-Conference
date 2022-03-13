@@ -7,5 +7,6 @@ public interface Dao<T> {
     boolean create(T item) throws DaoException;
     void update() throws DaoException;
     void delete() throws DaoException;
+    void closeConnection() throws DaoException;
 
 }

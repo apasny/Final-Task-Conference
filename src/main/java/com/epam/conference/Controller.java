@@ -40,14 +40,14 @@ public class Controller extends HttpServlet {
         try {
             command = commandFactory.createCommand(commandLine);
         } catch (CommandException e) {
-            throw new ControllerException("Unable to execute " + this.getClass() + ".processPostRequest() " + e.getMessage(), e);
+            throw new ControllerException("Unable to execute " + this.getClass() + ".process() " + e.getMessage(), e);
         }
 
         String page;
         try {
             page = command.execute(req, resp);
         } catch (CommandException e) {
-            throw new ControllerException("Unable to execute " + this.getClass() + ".processPostRequest() " + e.getMessage(), e);
+            throw new ControllerException("Unable to execute " + this.getClass() + ".process() " + e.getMessage(), e);
         }
 
         req.getRequestDispatcher(page).forward(req, resp);

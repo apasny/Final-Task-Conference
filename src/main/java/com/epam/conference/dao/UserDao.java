@@ -9,4 +9,5 @@ public interface UserDao {
 
     Optional<User> findUserByLoginAndPassword(String login, String password) throws DaoException;
 
+    void close() throws DaoException;
 }

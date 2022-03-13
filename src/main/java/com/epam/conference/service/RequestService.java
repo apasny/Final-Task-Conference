@@ -10,4 +10,7 @@ public interface RequestService {
     List<Request> allRequests() throws ServiceException;
     List<Request> userRequests(String userId) throws ServiceException;
 
+    void close() throws ServiceException;
+
+    void apply(Request request) throws ServiceException;
 }

@@ -10,8 +10,9 @@ public class LogoutCommand implements Command {
     @Override
     public String execute(HttpServletRequest req, HttpServletResponse resp) throws CommandException {
         HttpSession session = req.getSession(false);
-        if (session != null)
+        if (session != null) {
             session.invalidate();
-        return null;
+        }
+        return "index.jsp";
     }
 }

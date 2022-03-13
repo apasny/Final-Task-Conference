@@ -12,4 +12,6 @@ public interface ConferenceDao {
     List<Conference> getAllConferences() throws DaoException;
 
     void deleteConference(Long id) throws DaoException;
+
+    void close() throws DaoException;
 }

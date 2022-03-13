@@ -15,10 +15,6 @@ public class ProxyConnection implements Connection {
         this.connectionPool = connectionPool;
     }
 
-    @Override
-    public void close() {
-        connectionPool.returnConnection((ProxyConnection) connection);
-    }
 
     @Override
     public Statement createStatement() throws SQLException {
@@ -61,8 +57,13 @@ public class ProxyConnection implements Connection {
     }
 
     @Override
+    public void close() throws SQLException {
+        connectionPool.returnConnection(this);
+    }
+
+    @Override
     public boolean isClosed() throws SQLException {
-        return false;
+        return connection.isClosed();
     }
 
     @Override
@@ -217,7 +218,7 @@ public class ProxyConnection implements Connection {
 
     @Override
     public boolean isValid(int timeout) throws SQLException {
-        return false;
+        return connection.isValid(timeout);
     }
 
     @Override

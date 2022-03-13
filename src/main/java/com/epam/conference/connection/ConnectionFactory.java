@@ -9,23 +9,14 @@ import java.util.ResourceBundle;
 public class ConnectionFactory {
 
     private final ResourceBundle resourceBundle = ResourceBundle.getBundle("database");
-    private Connection connection;
-    private ConnectionPool connectionPool;
+    private final ConnectionPool connectionPool;
 
-    {
-        try {
-            connection = DatabaseConnector.getConnection(resourceBundle);
-            connectionPool = ConnectionPool.getInstance();
-        } catch (DatabaseConnectorException e) {
-            e.printStackTrace();
-        }
+    public ConnectionFactory() throws DatabaseConnectorException {
+        connectionPool = ConnectionPool.getInstance();
     }
 
-    public ConnectionFactory() {
-    }
-
-    public ProxyConnection create() {
-        return new ProxyConnection(connection, connectionPool);
+    public ProxyConnection create() throws DatabaseConnectorException {
+        return new ProxyConnection(DatabaseConnector.getConnection(resourceBundle), connectionPool);
     }
 
 }

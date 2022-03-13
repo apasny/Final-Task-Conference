@@ -36,6 +36,11 @@ public class ConferenceDaoImpl extends AbstractDao<Conference> implements Confer
     }
 
     @Override
+    public void close() throws DaoException {
+        closeConnection();
+    }
+
+    @Override
     protected String getTableName() {
         return Conference.TABLE;
     }

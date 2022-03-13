@@ -14,7 +14,8 @@ public class SectionMapper implements Mapper<Section> {
                 resultSet.getTime("start_time"),
                 resultSet.getTime("end_time"),
                 resultSet.getInt("max_attendees"),
-                resultSet.getBoolean("is_available")
-        );
+                resultSet.getBoolean("is_available"),
+                resultSet.getBoolean("is_deleted"),
+                resultSet.getLong("conference_id"));
     }
 }

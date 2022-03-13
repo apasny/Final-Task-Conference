@@ -1,6 +1,5 @@
 package com.epam.conference.dao;
 
-import com.epam.conference.connection.ConnectionPool;
 import com.epam.conference.connection.ProxyConnection;
 import com.epam.conference.entity.Identifiable;
 import com.epam.conference.exception.DaoException;
@@ -36,12 +35,20 @@ public abstract class AbstractDao<T extends Identifiable> implements Dao<T> {
 
     @Override
     public void delete() throws DaoException {
+    }
 
+    @Override
+    public void closeConnection() throws DaoException {
+        try {
+            proxyConnection.close();
+        } catch (SQLException e) {
+            throw new DaoException("Unable to close connection",e);
+        }
     }
 
     protected List<T> getAll() throws DaoException, DatabaseConnectorException {
         String table = getTableName();
-        return executeQuery("select * from " + table);
+        return executeQuery("select * from " + table + " where is_deleted=0");
     }
 
     protected List<T> executeQuery(String query, Object... params) throws DaoException {
@@ -57,14 +64,6 @@ public abstract class AbstractDao<T extends Identifiable> implements Dao<T> {
             throw new DaoException("Unable to execute query where SQLState: " +
                     e.getSQLState() + "; Error code: " +
                     e.getErrorCode(), e);
-        } finally {
-
-            try {
-                ConnectionPool.getInstance().returnConnection(proxyConnection);
-            } catch (DatabaseConnectorException e) {
-                e.printStackTrace();
-            }
-
         }
     }
 
@@ -92,7 +91,7 @@ public abstract class AbstractDao<T extends Identifiable> implements Dao<T> {
 
     protected boolean executeDelete(Long id) throws DaoException {
         String table = getTableName();
-        try (PreparedStatement preparedStatement = createStatement("delete from "+table+" where id="+id)) {
+        try (PreparedStatement preparedStatement = createStatement("update "+table+" set is_deleted=true where id="+id)) {
             return preparedStatement.executeUpdate()> 0;
         } catch (SQLException exception) {
             throw new DaoException("Unable to execute update query", exception);

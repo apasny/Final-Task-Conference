@@ -31,10 +31,10 @@
 <c:otherwise>
   <div class="ul">
       <div class="li">
-          <a href="conferences"><fmt:message key="nav.conferences" /></a>
+          <a href="?command=conferences"><fmt:message key="nav.conferences" /></a>
       </div>
       <div class="li">
-          <a href="requests"><fmt:message key="nav.requests" /></a>
+          <a href="?command=requests"><fmt:message key="nav.requests" /></a>
       </div>
   </div>
 </c:otherwise>

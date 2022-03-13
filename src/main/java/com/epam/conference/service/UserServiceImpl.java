@@ -27,4 +27,13 @@ public class UserServiceImpl implements UserService {
 
         return user;
     }
+
+    @Override
+    public void close() throws ServiceException {
+        try {
+            dao.close();
+        } catch (DaoException e) {
+            throw new ServiceException("Unable to close connection",e);
+        }
+    }
 }

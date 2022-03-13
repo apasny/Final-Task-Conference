@@ -38,4 +38,22 @@ public class RequestServiceImpl implements RequestService {
 
         return requests;
     }
+
+    @Override
+    public void close() throws ServiceException {
+        try {
+            dao.close();
+        } catch (DaoException e) {
+            throw new ServiceException("Cannot close request connection",e);
+        }
+    }
+
+    @Override
+    public void apply(Request request) throws ServiceException {
+        try {
+            dao.apply(request);
+        } catch (DaoException e) {
+            throw new ServiceException("Cannot apply request",e);
+        }
+    }
 }

@@ -41,9 +41,15 @@ public class RequestsCommand implements Command{
             }
         }
 
+        try {
+            requestService.close();
+        } catch (ServiceException e) {
+            throw new CommandException("Unable to close request service connection", e);
+        }
+
         for (Request request : usersRequests) {
             Long id = request.getId();
-            req.setAttribute("conferenceId",id);
+            req.setAttribute("requestId",id);
         }
         req.setAttribute("usersRequests", usersRequests);
 

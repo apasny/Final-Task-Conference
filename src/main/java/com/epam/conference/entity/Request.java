@@ -14,14 +14,12 @@ public class Request implements Identifiable, Serializable {
     public static final String STATUS = "status";
 
     private final Long id;
-    private final Timestamp time;
     private final Long userId;
     private final Long sectionId;
     private final String status;
 
-    public Request(Long id, Timestamp time, Long userId, Long sectionId, String status) {
+    public Request(Long id, Long userId, Long sectionId, String status) {
         this.id = id;
-        this.time = time;
         this.userId = userId;
         this.sectionId = sectionId;
         this.status = status;
@@ -30,10 +28,6 @@ public class Request implements Identifiable, Serializable {
     @Override
     public Long getId() {
         return id;
-    }
-
-    public Timestamp getTime() {
-        return time;
     }
 
     public Long getUserId() {
@@ -54,7 +48,6 @@ public class Request implements Identifiable, Serializable {
         if (object == null || getClass() != object.getClass()) return false;
         Request request = (Request) object;
         return Objects.equals(id, request.id) &&
-                Objects.equals(time, request.time) &&
                 Objects.equals(userId, request.userId) &&
                 Objects.equals(sectionId, request.sectionId) &&
                 Objects.equals(status, request.status);
@@ -62,7 +55,7 @@ public class Request implements Identifiable, Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, time, userId, sectionId, status);
+        return Objects.hash(id, userId, sectionId, status);
     }
 
     @Override

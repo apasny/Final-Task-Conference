@@ -17,8 +17,12 @@ public class ConferenceServiceImpl implements ConferenceService{
     }
 
     @Override
-    public void create(Conference conference) throws DaoException {
-        dao.createConference(conference);
+    public void create(Conference conference) throws ServiceException {
+        try {
+            dao.createConference(conference);
+        } catch (DaoException e) {
+            throw new ServiceException("Unable to create conference", e);
+        }
     }
 
     @Override
@@ -40,5 +44,14 @@ public class ConferenceServiceImpl implements ConferenceService{
         }
 
         return conferences;
+    }
+
+    @Override
+    public void close() throws ServiceException {
+        try {
+            dao.close();
+        } catch (DaoException e) {
+            throw new ServiceException("Unable to close connection", e);
+        }
     }
 }

@@ -28,12 +28,19 @@ public class LoginCommand implements Command {
         } catch (ServiceException e) {
             throw new CommandException("Unable to execute login command" + e.getMessage(), e);
         }
+
+        try {
+            userService.close();
+        } catch (ServiceException e) {
+            throw new CommandException("Unable to close user service connection", e);
+        }
+
         if (user.isPresent()) {
             req.getSession().setAttribute("user", user.get());
             if (user.get().getIsAdmin()) {
-                return "WEB-INF/view/requests.jsp";
+                return req.getServletPath()+"?command=requests";
             } else {
-                return "WEB-INF/view/conferences.jsp";
+                return req.getServletPath()+"?command=conferences";
             }
         } else {
             return "index.jsp";

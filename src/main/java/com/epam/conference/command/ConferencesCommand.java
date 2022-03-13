@@ -27,6 +27,13 @@ public class ConferencesCommand implements Command {
         } catch (ServiceException e) {
             throw new CommandException("Unable to execute requests command" + e.getMessage(), e);
         }
+
+        try {
+            conferenceService.close();
+        } catch (ServiceException e) {
+            throw new CommandException("Unable to close conference service connection", e);
+        }
+
         for (Conference conference : conferences) {
             Long id = conference.getId();
             String topic = conference.getTopic();

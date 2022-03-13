@@ -7,7 +7,7 @@
 <fmt:setBundle basename="pagecontent" />
 
 <!DOCTYPE html>
-<html lang="<%= request.getLocale().getLanguage() %>"">
+<html lang="<%= request.getLocale().getLanguage() %>">
 <title>Conference</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -27,7 +27,6 @@
     <jsp:include page="navbar.jsp" />
 
     <!--CONTENT-->
-    <jsp:include page="content.jsp" />
 
     <!--FOOTER-->
     <jsp:include page="footer.jsp" />

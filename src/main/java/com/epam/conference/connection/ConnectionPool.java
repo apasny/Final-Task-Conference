@@ -38,7 +38,7 @@ public class ConnectionPool {
         return localInstance;
     }
 
-    private static void initConnectionPool() {
+    private static void initConnectionPool() throws DatabaseConnectorException {
         connectionFactory = new ConnectionFactory();
         connectionPool = new ArrayDeque<>(INITIAL_POOL_SIZE);
         for (int i = 0; i < INITIAL_POOL_SIZE; i++) {
@@ -49,15 +49,15 @@ public class ConnectionPool {
     public void returnConnection(ProxyConnection proxyConnection) {
         connectionLock.lock();
         try {
-            if (connectionInUse.contains(proxyConnection)) {
-                connectionPool.offer(proxyConnection);
+            if (connectionInUse.contains(proxyConnection) && connectionPool.size()<INITIAL_POOL_SIZE) {
+                connectionPool.offer(connectionInUse.poll());
             }
         } finally {
             connectionLock.unlock();
         }
     }
 
-    public ProxyConnection getConnection() throws SQLException {
+    public ProxyConnection getConnection() throws SQLException, DatabaseConnectorException {
         connectionLock.lock();
         ProxyConnection connection;
         try {
@@ -74,8 +74,8 @@ public class ConnectionPool {
                 throw new RuntimeException("No available connections");
             }
 
-            if (connection != null && !connection.isValid(50)) {
-                connection = connectionFactory.create();
+            if (connection != null && !connection.isValid(10)) {
+                connection = connectionPool.poll();
             }
 
             connectionInUse.add(connection);

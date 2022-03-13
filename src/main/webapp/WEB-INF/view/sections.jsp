@@ -2,7 +2,7 @@
 <%@ page contentType="text/html; charset=UTF-8" isELIgnored="false" language="java" %>
 <%@ page import="java.io.*,java.util.*" %>
 
-<c:set var="usersRequests" value='<%= request.getAttribute("usersRequests")%>'/>
+<c:set var="sections" value='<%= request.getAttribute("sections")%>'/>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -25,25 +25,33 @@
     <jsp:include page="navbar.jsp"/>
 
     <!--CONTENT-->
-    <div class="requests-content">
-        <c:forEach var="item" items="${usersRequests}">
-            <div class="request">
-                <p>Request from USER.NAME USER.SURNAME</p>
-                <p>CONFERENCE topic: </p>
+    <div class="content">
+        <div class="conferences-content">
+            <c:forEach var="item" items="${sections}">
                 <c:choose>
                     <c:when test="${isAdmin}">
-                        <div class="btn btn-request accept" type="submit" action="controller?command=accept">Accept
-                        </div>
-                        <div class="btn btn-request cancel" type="submit" action="controller?command=decline">Decline
+                        <div class="section">
+                            <p>SECTION topic:<c:out value="${item.topic}"/></p>
+                            <p>ID:<c:out value="${item.id}"/></p>
+                            <form method="post"
+                                  action="main?command=delete&id=${item.id}">
+                                <button class="btn btn-request cancel" type="submit">Delete</button>
+                            </form>
                         </div>
                     </c:when>
                     <c:otherwise>
-                        <div class="btn btn-request cancel" type="submit" action="controller?command=cancel">Cancel
+                        <div class="section">
+                            <p>SECTION topic:<c:out value="${item.topic}"/></p>
+                            <p>ID:<c:out value="${item.id}"/></p>
+                            <form method="post"
+                                  action="main?command=apply&section-id=${item.id}">
+                                <button class="btn btn-request apply" type="submit">Apply</button>
+                            </form>
                         </div>
                     </c:otherwise>
                 </c:choose>
-            </div>
-        </c:forEach>
+            </c:forEach>
+        </div>
     </div>
 
     <!--FOOTER-->
