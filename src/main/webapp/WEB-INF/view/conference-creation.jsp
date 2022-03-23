@@ -3,7 +3,7 @@
 <%@ page import = "java.io.*,java.util.*" %>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="${param.lang}">
 <title>Conference</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -24,7 +24,7 @@
 
     <!--CONTENT-->
     <div class="create-content">
-      <form method="post" action="main?command=create-conference">
+      <form method="post" action="create-conference">
         <input class="data-input" type="text" name="topic" placeholder="topic" required/>
         <input class="data-input" type="date" name="start-date" placeholder="" required />
         <input class="data-input" type="date" name="end-date" placeholder="" required/>

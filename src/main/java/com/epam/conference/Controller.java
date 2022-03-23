@@ -33,12 +33,11 @@ public class Controller extends HttpServlet {
 
     private void process(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException, ControllerException {
 
-        String commandLine = req.getParameter("command");
         CommandFactory commandFactory = new CommandFactory();
 
         Command command;
         try {
-            command = commandFactory.createCommand(commandLine);
+            command = commandFactory.createCommand(req);
         } catch (CommandException e) {
             throw new ControllerException("Unable to execute " + this.getClass() + ".process() " + e.getMessage(), e);
         }
@@ -50,7 +49,12 @@ public class Controller extends HttpServlet {
             throw new ControllerException("Unable to execute " + this.getClass() + ".process() " + e.getMessage(), e);
         }
 
-        req.getRequestDispatcher(page).forward(req, resp);
+        if (page.equals(req.getServletPath().substring(1))) {
+            req.getRequestDispatcher("/WEB-INF/view/" + page + ".jsp").forward(req, resp);
+        }
+        else {
+            resp.sendRedirect(page);
+        }
     }
 
 }

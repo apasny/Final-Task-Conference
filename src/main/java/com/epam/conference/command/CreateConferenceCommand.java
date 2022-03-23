@@ -38,6 +38,6 @@ public class CreateConferenceCommand implements Command {
             throw new CommandException("Unable to close conference service connection", e);
         }
 
-        return "WEB-INF/view/create-conference.jsp";
+        return "create-conference";
     }
 }

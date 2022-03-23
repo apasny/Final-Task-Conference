@@ -30,9 +30,18 @@ public class SectionServiceImpl implements SectionService {
     }
 
     @Override
-    public List<Section> sections(String id) throws ServiceException {
+    public List<Section> allSections(String id) throws ServiceException {
         try {
             return dao.getAllSectionsByConferenceId(id);
+        } catch (DaoException e) {
+            throw new ServiceException("Cannot get sections" + e.getMessage(),e);
+        }
+    }
+
+    @Override
+    public List<Section> notAppliedSections(String userId,String conferenceId) throws ServiceException {
+        try {
+            return dao.getAllNotAppliedSections(userId,conferenceId);
         } catch (DaoException e) {
             throw new ServiceException("Cannot get sections" + e.getMessage(),e);
         }

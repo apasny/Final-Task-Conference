@@ -20,8 +20,7 @@ public class RequestDaoImpl extends AbstractDao<Request> implements RequestDao {
 
     @Override
     public List<Request> getAllRequests() throws DaoException {
-            String table = getTableName();
-            return executeQuery("select * from " + table);
+        return executeQuery("select * from request join user on user.id=request.user_id join section on section.id = request.section_id join conference on conference.id = section.conference_id");
     }
 
     @Override
@@ -47,10 +46,10 @@ public class RequestDaoImpl extends AbstractDao<Request> implements RequestDao {
     @Override
     protected Map<String, Object> getFields(Request item) {
         Map<String, Object> requestFields = new LinkedHashMap<>();
-        requestFields.put(Request.ID,item.getId());
-        requestFields.put(Request.USER_ID,item.getUserId());
-        requestFields.put(Request.SECTION_ID,item.getSectionId());
-        requestFields.put(Request.STATUS,item.getStatus());
+        requestFields.put(Request.ID, item.getId());
+        requestFields.put(Request.USER_ID, item.getUserId());
+        requestFields.put(Request.SECTION_ID, item.getSectionId());
+        requestFields.put(Request.STATUS, item.getStatus());
         return requestFields;
     }
 }

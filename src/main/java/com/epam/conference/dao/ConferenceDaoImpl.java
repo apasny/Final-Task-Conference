@@ -49,7 +49,7 @@ public class ConferenceDaoImpl extends AbstractDao<Conference> implements Confer
     protected Map<String, Object> getFields(Conference item) {
         Map<String, Object> conferenceFields = new LinkedHashMap<>();
         conferenceFields.put(Conference.ID,item.getId());
-        conferenceFields.put(Conference.TOPIC,item.getTopic());
+        conferenceFields.put(Conference.TOPICS,item.getTopics());
         conferenceFields.put(Conference.STARTDATE,item.getStartDate());
         conferenceFields.put(Conference.ENDDATE,item.getEndDate());
         conferenceFields.put(Conference.PLACE,item.getPlace());

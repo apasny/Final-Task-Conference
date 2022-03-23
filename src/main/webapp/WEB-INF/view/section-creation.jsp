@@ -5,7 +5,7 @@
 <c:set var="conferences" value='<%= request.getAttribute("conferences")%>'/>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="${param.lang}">
 <title>Conference</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -33,7 +33,7 @@
       <form method="post" action="main?command=create-section">
         <select name="conference" id="conference">
           <c:forEach var="item" items="${conferences}">
-            <option value="${item.id}"><c:out value="${item.topic}"/></option>
+            <option value="${item.id}"><c:out value="${item.topics}"/></option>
           </c:forEach>
         </select>
         <input class="hidden" type="hidden" name="conference-id" value="" required/>

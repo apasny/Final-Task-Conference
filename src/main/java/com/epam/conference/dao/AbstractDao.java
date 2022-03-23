@@ -42,7 +42,7 @@ public abstract class AbstractDao<T extends Identifiable> implements Dao<T> {
         try {
             proxyConnection.close();
         } catch (SQLException e) {
-            throw new DaoException("Unable to close connection",e);
+            throw new DaoException("Unable to close connection", e);
         }
     }
 
@@ -84,15 +84,23 @@ public abstract class AbstractDao<T extends Identifiable> implements Dao<T> {
         return executeQuery("select * from " + table + " where " + columnName + "='" + columnValue + "'");
     }
 
-    protected List<T> executeForColumnResultWithJoin(String columnName, String columnValue, String joinTableName, String joinColumnName) throws DaoException {
+    protected List<T> executeForColumnResultWithJoin(String joinTable, String tableColumnName, String joinTableColumnName) throws DaoException {
         String table = getTableName();
-        return executeQuery("select * from " + table + " where " + columnName + "='" + columnValue + "' INNER JOIN "+ joinTableName + " ON "+ columnName+ "=" +joinColumnName);
+        return executeQuery("select * from " + table + " join " + joinTable + " on " + tableColumnName + "=" + joinTableColumnName);
+    }
+
+    protected List<T> executeForColumnResultForUserWithNotIn(String tableColumnName, String joinTableColumnName, String secondTableColumnName, String filter, String firstId, String secondId) throws DaoException {
+        String table = getTableName();
+        return executeQuery("select * from " +
+                table + " where " + tableColumnName +
+                " NOT IN (select " + joinTableColumnName + " from "
+                + secondTableColumnName + " where " + filter + "=" + firstId + ") having conference_id="+secondId);
     }
 
     protected boolean executeDelete(Long id) throws DaoException {
         String table = getTableName();
-        try (PreparedStatement preparedStatement = createStatement("update "+table+" set is_deleted=true where id="+id)) {
-            return preparedStatement.executeUpdate()> 0;
+        try (PreparedStatement preparedStatement = createStatement("update " + table + " set is_deleted=true where id=" + id)) {
+            return preparedStatement.executeUpdate() > 0;
         } catch (SQLException exception) {
             throw new DaoException("Unable to execute update query", exception);
         }

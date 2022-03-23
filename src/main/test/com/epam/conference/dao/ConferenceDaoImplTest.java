@@ -3,6 +3,7 @@ package com.epam.conference.dao;
 import com.epam.conference.connection.ConnectionPool;
 import com.epam.conference.connection.ProxyConnection;
 import com.epam.conference.entity.Conference;
+import com.epam.conference.entity.Section;
 import com.epam.conference.exception.DaoException;
 import com.epam.conference.exception.DatabaseConnectorException;
 import org.junit.Assert;
@@ -44,12 +45,12 @@ public class ConferenceDaoImplTest {
         Assert.assertEquals("UPDATE conference SET topic='React2', start_date='2022-12-22', end_date='2022-12-24', place='Minsk', is_available=true, is_deleted=false WHERE id=62",query);
     }
 
-//    @Test
-//    public void executeForColumnResult() throws DatabaseConnectorException, SQLException, DaoException {
-//        ConferenceDaoImpl conferenceDao = new ConferenceDaoImpl(new ProxyConnection(ConnectionPool.getInstance().getConnection(),ConnectionPool.getInstance()));
-//        List<Conference> resultSet = conferenceDao.executeForColumnResult(Conference.ID, "62");
-//        Assert.assertEquals(resultSet.size(),1);
-//    }
+    @Test
+    public void executeForColumnResult() throws DatabaseConnectorException, SQLException, DaoException {
+        SectionDao sectionDao = new SectionDaoImpl(new ProxyConnection(ConnectionPool.getInstance().getConnection(),ConnectionPool.getInstance()));
+        List<Section> resultSet = sectionDao.getAllNotAppliedSections("2","3");
+        Assert.assertEquals(resultSet.size(),1);
+    }
 
 //    @Test
 //    public void getAll() throws DatabaseConnectorException, SQLException, DaoException {

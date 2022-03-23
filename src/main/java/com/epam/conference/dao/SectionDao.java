@@ -9,6 +9,8 @@ public interface SectionDao {
 
     List<Section> getAllSectionsByConferenceId(String id) throws DaoException;
 
+    List<Section> getAllNotAppliedSections(String userId,String conferenceId) throws DaoException;
+
     void createSection(Section section) throws DaoException;
 
     void close() throws DaoException;

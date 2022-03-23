@@ -5,7 +5,7 @@
 <c:set var="conferences" value='<%= request.getAttribute("conferences")%>'/>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="${param.lang}">
 <title>Conference</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -31,7 +31,7 @@
                 <c:choose>
                     <c:when test="${isAdmin}">
                         <div class="conference">
-                            <p>CONFERENCE topic:<c:out value="${item.topic}"/></p>
+                            <p>CONFERENCE topic:<c:out value="${item.topics}"/></p>
                             <p>PLACE:<c:out value="${item.place}"/></p>
                             <form method="post"
                                   action="main?command=sections&id=${item.id}">
@@ -45,7 +45,7 @@
                     </c:when>
                     <c:otherwise>
                         <div class="conference">
-                            <p>CONFERENCE topic:<c:out value="${item.topic}"/></p>
+                            <p>CONFERENCE topic:<c:out value="${item.topics}"/></p>
                             <p>PLACE:<c:out value="${item.place}"/></p>
                             <form method="post"
                                   action="main?command=sections&id=${item.id}">

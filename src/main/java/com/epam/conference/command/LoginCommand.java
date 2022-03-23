@@ -37,10 +37,11 @@ public class LoginCommand implements Command {
 
         if (user.isPresent()) {
             req.getSession().setAttribute("user", user.get());
+            req.getSession().setAttribute("language", req.getLocale().getLanguage());
             if (user.get().getIsAdmin()) {
-                return req.getServletPath()+"?command=requests";
+                return "requests";
             } else {
-                return req.getServletPath()+"?command=conferences";
+                return "conferences";
             }
         } else {
             return "index.jsp";

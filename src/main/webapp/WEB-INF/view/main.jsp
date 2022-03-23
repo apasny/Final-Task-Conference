@@ -3,11 +3,12 @@
 <%@ page contentType="text/html; charset=UTF-8" isELIgnored="false" language="java"%>
 <%@ page import = "java.io.*,java.util.*" %>
 
-<fmt:setLocale value="<%= request.getLocale().getLanguage() %>" />
+<c:set var="language" value="${not empty param.language ? param.language : not empty language ? language : pageContext.request.locale}" scope="session" />
+<fmt:setLocale value="${language}" scope="session"/>
 <fmt:setBundle basename="pagecontent" />
 
 <!DOCTYPE html>
-<html lang="<%= request.getLocale().getLanguage() %>">
+<html lang="${language}">
 <title>Conference</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">

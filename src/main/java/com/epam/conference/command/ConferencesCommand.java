@@ -36,7 +36,7 @@ public class ConferencesCommand implements Command {
 
         for (Conference conference : conferences) {
             Long id = conference.getId();
-            String topic = conference.getTopic();
+            String topic = conference.getTopics();
             Date date = conference.getStartDate();
             String place = conference.getPlace();
             req.setAttribute("conferenceId", id);
@@ -46,6 +46,6 @@ public class ConferencesCommand implements Command {
         }
         req.setAttribute("conferences", conferences);
 
-        return "WEB-INF/view/conferences.jsp";
+        return "conferences";
     }
 }

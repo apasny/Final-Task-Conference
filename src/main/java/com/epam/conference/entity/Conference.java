@@ -8,7 +8,7 @@ public class Conference implements Identifiable, Serializable {
 
     public static final String TABLE = "conference";
     public static final String ID = "id";
-    public static final String TOPIC = "topic";
+    public static final String TOPICS = "topic";
     public static final String STARTDATE = "start_date";
     public static final String ENDDATE = "end_date";
     public static final String PLACE = "place";
@@ -16,16 +16,16 @@ public class Conference implements Identifiable, Serializable {
     public static final String ISDELETED = "is_deleted";
 
     private final Long id;
-    private final String topic;
+    private final String topics;
     private final Date startDate;
     private final Date endDate;
     private final String place;
     private final boolean isAvailable;
     private final boolean isDeleted;
 
-    public Conference(Long id, String topic, Date startDate, Date endDate, String place, boolean isAvailable, boolean isDeleted) {
+    public Conference(Long id, String topics, Date startDate, Date endDate, String place, boolean isAvailable, boolean isDeleted) {
         this.id = id;
-        this.topic = topic;
+        this.topics = topics;
         this.startDate = startDate;
         this.endDate = endDate;
         this.place = place;
@@ -39,8 +39,8 @@ public class Conference implements Identifiable, Serializable {
         return id;
     }
 
-    public String getTopic() {
-        return topic;
+    public String getTopics() {
+        return topics;
     }
 
     public Date getStartDate() {
@@ -71,7 +71,7 @@ public class Conference implements Identifiable, Serializable {
         return isAvailable == that.isAvailable &&
                 isDeleted == that.isDeleted &&
                 Objects.equals(id, that.id) &&
-                Objects.equals(topic, that.topic) &&
+                Objects.equals(topics, that.topics) &&
                 Objects.equals(startDate, that.startDate) &&
                 Objects.equals(endDate, that.endDate) &&
                 Objects.equals(place, that.place);
@@ -79,14 +79,14 @@ public class Conference implements Identifiable, Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, topic, startDate, endDate, place, isAvailable, isDeleted);
+        return Objects.hash(id, topics, startDate, endDate, place, isAvailable, isDeleted);
     }
 
     @Override
     public String toString() {
         return "Conference{" +
                 "id=" + id +
-                ", topic='" + topic + '\'' +
+                ", topic='" + topics + '\'' +
                 ", startDate=" + startDate +
                 ", endDate=" + endDate +
                 ", place='" + place + '\'' +

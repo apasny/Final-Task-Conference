@@ -41,6 +41,6 @@ public class CreateSectionCommand implements Command{
             throw new CommandException("Unable to close conference service", e);
         }
 
-        return "WEB-INF/view/create-section.jsp";
+        return "create-section";
     }
 }

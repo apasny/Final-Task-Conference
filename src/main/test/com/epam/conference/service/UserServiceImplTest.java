@@ -5,6 +5,7 @@ import com.epam.conference.connection.ProxyConnection;
 import com.epam.conference.dao.UserDao;
 import com.epam.conference.dao.UserDaoImpl;
 import com.epam.conference.entity.User;
+import com.epam.conference.exception.DatabaseConnectorException;
 import com.epam.conference.exception.ServiceException;
 import org.junit.Assert;
 import org.junit.Test;
@@ -14,7 +15,7 @@ import java.util.Optional;
 public class UserServiceImplTest {
 
     @Test
-    public void login() throws ServiceException {
+    public void login() throws ServiceException, DatabaseConnectorException {
 
         String login = "admin";
         String password = "admin";

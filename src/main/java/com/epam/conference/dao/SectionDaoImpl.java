@@ -21,6 +21,11 @@ public class SectionDaoImpl extends AbstractDao<Section> implements SectionDao {
     }
 
     @Override
+    public List<Section> getAllNotAppliedSections(String userId,String conferenceId) throws DaoException {
+        return executeForColumnResultForUserWithNotIn("section.id","section_id","request","request.user_id",userId,conferenceId);
+    }
+
+    @Override
     public void createSection(Section section) throws DaoException {
         create(section);
     }

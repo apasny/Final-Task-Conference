@@ -5,7 +5,7 @@
 <c:set var="sections" value='<%= request.getAttribute("sections")%>'/>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="${param.lang}">
 <title>Conference</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">

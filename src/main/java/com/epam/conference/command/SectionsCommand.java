@@ -1,7 +1,7 @@
 package com.epam.conference.command;
 
-import com.epam.conference.entity.Conference;
 import com.epam.conference.entity.Section;
+import com.epam.conference.entity.User;
 import com.epam.conference.exception.CommandException;
 import com.epam.conference.exception.ServiceException;
 import com.epam.conference.service.SectionService;
@@ -9,7 +9,6 @@ import com.epam.conference.service.SectionService;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class SectionsCommand implements Command {
 
@@ -24,11 +23,21 @@ public class SectionsCommand implements Command {
 
         ArrayList<Section> sections;
         String conferenceId = req.getParameter("id");
+        User user = (User) req.getSession().getAttribute("user");
+        String userId = user.getId().toString();
 
-        try {
-            sections = (ArrayList<Section>) sectionService.sections(conferenceId);
-        } catch (ServiceException e) {
-            throw new CommandException("Unable to execute requests command" + e.getMessage(), e);
+        if(user.getIsAdmin()){
+            try {
+                sections = (ArrayList<Section>) sectionService.allSections(conferenceId);
+            } catch (ServiceException e) {
+                throw new CommandException("Unable to execute requests command" + e.getMessage(), e);
+            }
+        } else {
+            try {
+                sections = (ArrayList<Section>) sectionService.notAppliedSections(userId,conferenceId);
+            } catch (ServiceException e) {
+                throw new CommandException("Unable to execute requests command" + e.getMessage(), e);
+            }
         }
 
         try {
@@ -43,8 +52,9 @@ public class SectionsCommand implements Command {
             req.setAttribute("sectionId", id);
             req.setAttribute("topic", topic);
         }
+
         req.setAttribute("sections", sections);
 
-        return "WEB-INF/view/sections.jsp";
+        return "sections";
     }
 }

@@ -1,5 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" isELIgnored="false"%>
-<html>
+<html lang="${param.lang}">
     <head>
         <link rel="stylesheet" href="static/styles/login.css" />
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
@@ -8,7 +8,7 @@
         <body>
             <div class="login-page">
                 <main class="form">
-                    <form class="login-form" method="post" action="main?command=login">
+                    <form class="login-form" method="post" action="login">
                         <h1 class="">Please sign in</h1>
                             <input name="login" type="text" class="form-control" id="floatingInput" placeholder="Login">
                             <input name="password" type="password" class="form-control" id="floatingPassword" placeholder="Password">

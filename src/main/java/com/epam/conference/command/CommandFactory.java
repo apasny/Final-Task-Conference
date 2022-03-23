@@ -1,12 +1,12 @@
 package com.epam.conference.command;
 
 import com.epam.conference.dao.*;
-import com.epam.conference.entity.Section;
 import com.epam.conference.exception.CommandException;
 import com.epam.conference.exception.DaoException;
 import com.epam.conference.exception.DatabaseConnectorException;
 import com.epam.conference.service.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.sql.SQLException;
 
 public class CommandFactory {
@@ -25,10 +25,14 @@ public class CommandFactory {
     private static final String CONFERENCE_CREATION = "conference-creation";
     private static final String SECTION_CREATION = "section-creation";
 
-    public Command createCommand(String command) throws CommandException {
 
-        DaoHelperFactory daoHelperFactory;
-        DaoHelper daoHelper;
+    private final DaoHelperFactory daoHelperFactory = new DaoHelperFactory();
+
+    public Command createCommand(HttpServletRequest req) throws CommandException {
+
+        String method = req.getMethod();
+        String command = req.getServletPath().replaceAll("/", "");
+
         UserDao userDao;
         UserService userService;
         ConferenceDao conferenceDao;
@@ -37,12 +41,14 @@ public class CommandFactory {
         RequestService requestService;
         SectionDao sectionDao;
         SectionService sectionService;
+        DtoDao dtoDao;
+        DtoService dtoService;
 
+        DaoHelper daoHelper;
         try {
-            daoHelperFactory = new DaoHelperFactory();
             daoHelper = daoHelperFactory.create();
-        } catch (DatabaseConnectorException | SQLException | DaoException e) {
-            throw new CommandException("Unable to create command " + e.getMessage(), e);
+        } catch (DatabaseConnectorException | SQLException | DaoException exception) {
+            throw new CommandException("", exception);
         }
 
         switch (command) {
@@ -79,11 +85,11 @@ public class CommandFactory {
                 sectionService = new SectionServiceImpl(sectionDao);
                 return new SectionsCommand(sectionService);
             case REQUESTS:
-                requestDao = daoHelper.createRequestDao();
-                requestService = new RequestServiceImpl(requestDao);
-                return new RequestsCommand(requestService);
+                dtoDao = daoHelper.createDtoDao();
+                dtoService = new DtoServiceImpl(dtoDao);
+                return new RequestsCommand(dtoService);
             case LOGOUT:
-                return new LogoutCommand();
+                return new LogoutCommand(daoHelper);
             case CONFERENCE_CREATION:
                 return new CreateConferencePage();
             case SECTION_CREATION:

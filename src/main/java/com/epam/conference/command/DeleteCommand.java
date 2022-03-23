@@ -26,6 +26,6 @@ public class DeleteCommand implements Command {
             throw new CommandException("Unable to execute delete command",e);
         }
 
-        return "WEB-INF/view/conferences.jsp";
+        return "conferences";
     }
 }

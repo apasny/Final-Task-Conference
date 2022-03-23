@@ -8,6 +8,6 @@ import javax.servlet.http.HttpServletResponse;
 public class CreateConferencePage implements Command {
     @Override
     public String execute(HttpServletRequest req, HttpServletResponse resp) throws CommandException {
-        return "WEB-INF/view/create-conference.jsp";
+        return "conference-creation";
     }
 }

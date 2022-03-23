@@ -1,9 +1,9 @@
 package com.epam.conference.command;
 
-import com.epam.conference.entity.Request;
-import com.epam.conference.entity.User;
+import com.epam.conference.entity.*;
 import com.epam.conference.exception.CommandException;
 import com.epam.conference.exception.ServiceException;
+import com.epam.conference.service.DtoService;
 import com.epam.conference.service.RequestService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,16 +12,16 @@ import java.util.ArrayList;
 
 public class RequestsCommand implements Command{
 
-    private final RequestService requestService;
+    private final DtoService dtoService;
 
-    public RequestsCommand(RequestService requestService) {
-        this.requestService = requestService;
+    public RequestsCommand(DtoService dtoService) {
+        this.dtoService = dtoService;
     }
 
     @Override
     public String execute(HttpServletRequest req, HttpServletResponse resp) throws CommandException {
 
-        ArrayList<Request> usersRequests;
+        ArrayList<Dto> dtos;
 
         User user = (User)req.getSession().getAttribute("user");
         String userId = user.getId().toString();
@@ -29,30 +29,36 @@ public class RequestsCommand implements Command{
 
         if (role){
             try {
-                usersRequests = (ArrayList<Request>) requestService.allRequests();
+                dtos = (ArrayList<Dto>) dtoService.allRequests();
             } catch (ServiceException e) {
                 throw new CommandException("Unable to execute requests command" + e.getMessage(), e);
             }
         } else {
             try {
-                usersRequests = (ArrayList<Request>) requestService.userRequests(userId);
+                dtos = (ArrayList<Dto>) dtoService.userRequests(userId);
             } catch (ServiceException e) {
                 throw new CommandException("Unable to execute User requests command" + e.getMessage(), e);
             }
         }
 
         try {
-            requestService.close();
+            dtoService.close();
         } catch (ServiceException e) {
             throw new CommandException("Unable to close request service connection", e);
         }
 
-        for (Request request : usersRequests) {
-            Long id = request.getId();
-            req.setAttribute("requestId",id);
+        for (Dto dto : dtos) {
+            User userDto = dto.getUser();
+            Request requestDto = dto.getRequest();
+            Section sectionDto = dto.getSection();
+            Conference conferenceDto = dto.getConference();
+            req.setAttribute("userDto",userDto);
+            req.setAttribute("requestDto",requestDto);
+            req.setAttribute("sectionDto",sectionDto);
+            req.setAttribute("conferenceDto",conferenceDto);
         }
-        req.setAttribute("usersRequests", usersRequests);
+        req.setAttribute("dtos", dtos);
 
-        return "WEB-INF/view/requests.jsp";
+        return "requests";
     }
 }

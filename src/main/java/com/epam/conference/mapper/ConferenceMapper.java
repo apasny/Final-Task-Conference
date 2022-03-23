@@ -10,7 +10,7 @@ public class ConferenceMapper implements Mapper<Conference> {
     public Conference map(ResultSet resultSet) throws SQLException {
         return new Conference(
                 resultSet.getLong("id"),
-                resultSet.getString("topic"),
+                resultSet.getString("topics"),
                 resultSet.getDate("start_date"),
                 resultSet.getDate("end_date"),
                 resultSet.getString("place"),
