@@ -34,11 +34,11 @@
                             <p>CONFERENCE topic:<c:out value="${item.topics}"/></p>
                             <p>PLACE:<c:out value="${item.place}"/></p>
                             <form method="post"
-                                  action="main?command=sections&id=${item.id}">
+                                  action="?sections&id=${item.id}">
                                 <button class="btn btn-request accept" type="submit">Sections</button>
                             </form>
                             <form method="post"
-                                  action="main?command=delete&id=${item.id}">
+                                  action="?delete&id=${item.id}">
                                 <button class="btn btn-request cancel" type="submit">Delete</button>
                             </form>
                         </div>
@@ -48,8 +48,9 @@
                             <p>CONFERENCE topic:<c:out value="${item.topics}"/></p>
                             <p>PLACE:<c:out value="${item.place}"/></p>
                             <form method="post"
-                                  action="main?command=sections&id=${item.id}">
+                                  action="sections">
                                 <button class="btn btn-request apply" type="submit">Apply</button>
+                                <input class="hidden" type="hidden" name="conference-id" value="${item.id}" required/>
                             </form>
                         </div>
                     </c:otherwise>

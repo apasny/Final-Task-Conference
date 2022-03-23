@@ -7,7 +7,7 @@
     <display-name>Conference</display-name>
 
     <servlet>
-        <servlet-name>main</servlet-name>
+        <servlet-name>index</servlet-name>
         <servlet-class>com.epam.conference.Controller</servlet-class>
     </servlet>
     <servlet>
@@ -40,8 +40,8 @@
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>main</servlet-name>
-        <url-pattern>/main</url-pattern>
+        <servlet-name>index</servlet-name>
+        <url-pattern>/index</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>login</servlet-name>
@@ -71,10 +71,6 @@
         <servlet-name>sections</servlet-name>
         <url-pattern>/sections</url-pattern>
     </servlet-mapping>
-
-    <session-config>
-        <session-timeout>10</session-timeout>
-    </session-config>
 
 </web-app>
 

@@ -14,10 +14,6 @@
     </div>
     <div class="icons-container">
         <div class="lang">
-            <%--      <a href="?lang=ru">RU</a>--%>
-            <%--      <a href="?lang=en">EN</a>--%>
-            <%--      <a href="?lang=by">BY</a>--%>
-            <%--      <a href="#"><img src="static/img/globe-32.png"></a>--%>
             <form>
                 <select id="language" name="language" onchange="submit()">
                     <option value="ru" ${language == 'ru' ? 'selected' : ''}>RU</option>
@@ -26,7 +22,6 @@
                 </select>
             </form>
         </div>
-
         <div class="logout">
             <a href="logout"><img src="static/img/logout-24.png"></a>
         </div>

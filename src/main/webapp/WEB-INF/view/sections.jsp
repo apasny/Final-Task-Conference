@@ -34,7 +34,7 @@
                             <p>SECTION topic:<c:out value="${item.topic}"/></p>
                             <p>ID:<c:out value="${item.id}"/></p>
                             <form method="post"
-                                  action="main?command=delete&id=${item.id}">
+                                  action="delete&id=${item.id}">
                                 <button class="btn btn-request cancel" type="submit">Delete</button>
                             </form>
                         </div>
@@ -44,7 +44,7 @@
                             <p>SECTION topic:<c:out value="${item.topic}"/></p>
                             <p>ID:<c:out value="${item.id}"/></p>
                             <form method="post"
-                                  action="main?command=apply&section-id=${item.id}">
+                                  action="apply&section-id=${item.id}">
                                 <button class="btn btn-request apply" type="submit">Apply</button>
                             </form>
                         </div>

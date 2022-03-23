@@ -19,6 +19,7 @@ public class LoginCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest req, HttpServletResponse resp) throws CommandException {
+
         String login = req.getParameter("login");
         String password = req.getParameter("password");
 
@@ -37,7 +38,6 @@ public class LoginCommand implements Command {
 
         if (user.isPresent()) {
             req.getSession().setAttribute("user", user.get());
-            req.getSession().setAttribute("language", req.getLocale().getLanguage());
             if (user.get().getIsAdmin()) {
                 return "requests";
             } else {

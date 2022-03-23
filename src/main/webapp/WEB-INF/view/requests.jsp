@@ -43,7 +43,7 @@
                     </c:when>
                     <c:otherwise>
                         <p>Request for SECTION: ${item.getSection().getTopic()} on time ${item.getSection().getStartTime()}</p>
-                        <p>CONFERENCE topic: ${item.getConference().getTopics()} on date ${item.getConference().getStartDate()}</p>
+                        <p>CONFERENCE topic: ${item.getConference().getTopics()} on date ${item.getConference().getStartDate()} STATUS: ${item.getRequest().getStatus()}</p>
                         <div class="btn btn-request cancel" type="submit" action="controller?command=cancel">Cancel
                         </div>
                     </c:otherwise>

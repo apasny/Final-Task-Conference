@@ -22,7 +22,7 @@ public class SectionsCommand implements Command {
     public String execute(HttpServletRequest req, HttpServletResponse resp) throws CommandException {
 
         ArrayList<Section> sections;
-        String conferenceId = req.getParameter("id");
+        String conferenceId = req.getParameter("conference-id");
         User user = (User) req.getSession().getAttribute("user");
         String userId = user.getId().toString();
 
